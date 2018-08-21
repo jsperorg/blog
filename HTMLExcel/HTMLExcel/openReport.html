@@ -1,0 +1,279 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>凭证loading面板</title>
+</head>
+<body style="padding:0px;margin:0px;background-color:#D4D0C8;">
+<div id="loadingbox" style="width:100%;height:100%;background-color:#D4D0C8;text-align:center;position:absolute;z-index:99999;">
+<table style="width:100%;height:100%;margin:auto;">
+	<tr>
+		<td valign="middle">
+			<img src="images/loading.gif"/>
+		</td>
+	</tr>
+</table>
+</div>
+</body>
+</html>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>打开报表</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunction.js"></script>
+<link rel="stylesheet" type="text/css" href="report/css/report.css">
+<style type="text/css">
+*{font-family:宋体;}
+#fileList{width:416px;height:120px;border:2px inset #cccccc;overflow:auto;background-color:#ffffff;padding:0px;margin:0px;list-style:none;}
+#fileList li{width:146px;height:17px;line-height:17px;float:left;}
+#fileList img{vertical-align:middle;float:left;}
+#fileList div{margin-left:2px;float:left;}
+
+.button{width:80px;}
+</style>
+<script type="text/javascript">
+
+
+var currentSelectedTemplate = null;
+//模板选择函数
+function templateSelect(tem){
+	
+	if(currentSelectedTemplate!=null && currentSelectedTemplate != tem){
+		var img = currentSelectedTemplate.getElementsByTagName("img")[0];
+		img.src="images/rfsicon.bmp";
+		var label = currentSelectedTemplate.getElementsByTagName("label")[0];
+		label.style.backgroundColor = "";
+		label.style.color = "";
+		
+	}
+	
+	var img = tem.getElementsByTagName("img")[0];
+	img.src="images/rfsdicon.bmp";
+	var label = tem.getElementsByTagName("label")[0];
+	label.style.backgroundColor = "#0a246a";
+	label.style.color = "#ffffff";
+	currentSelectedTemplate = tem;
+	
+}
+
+function openIt(){
+	if(currentSelectedTemplate==null){
+		jAlert("请选择文件。");
+		return;
+	}
+	
+	var report = {};
+	report.guid=currentSelectedTemplate.getAttribute("guid");
+	report.name=currentSelectedTemplate.getAttribute("name");
+	
+	window.parent.deliverValue("HTMLExcel_openReport",report);
+	
+	window.parent.closeWindow("HTMLExcel_openReport");
+}
+
+function showReports(){
+
+	$.ajax({
+	    url: "mrReportAction!findReportListByPeriod",
+	    type: "post",
+	    //data: param,
+	    dataType: "json",
+		async:false,
+	    success: function(data){
+	    	
+	    	var dl = data.mrReportList;
+
+	    	$.each(dl,function(key,obj){
+    			str = "<li guid=\""+obj.guid+"\" name=\""+obj.name+"\" oncontextmenu=\"return show_contextmenu(event)\" onmousedown=\"templateSelect(this)\" ondblclick=\"openIt()\"><img src=\"images/rfsicon.bmp\"/><div><label>"+obj.name+".rep</label></div></li>";
+    			$("#fileList").append(str); 
+    	   });
+	    	
+	    	//隐藏Loading面板
+	    	$("#loadingbox").fadeOut("slow");
+	    },
+	    error:function(msg){
+	    	jAlert("发生错误！");
+	    	//隐藏Loading面板
+	    	$("#loadingbox").fadeOut("slow");
+	    }
+	});
+	
+	
+
+	
+}
+
+
+
+//显示右键菜单
+function show_contextmenu(event){
+	
+	
+
+	var evt=(window.event || event);
+	var x = 0;
+	var y = 0;
+	if(document.all){
+		x = evt.clientX;
+		y = evt.clientY;
+	}else{
+		x = evt.pageX;
+		y = evt.pageY;
+	}
+	
+	var cm = document.getElementById("contextmenu");
+	cm.style.top=y+"px";
+	cm.style.left = x+"px";
+	cm.style.display="block";
+	
+	document.onmousedown=function(event){
+
+		var evt=(window.event || event);
+		var evtsrc = (evt.srcElement || evt.target);
+		
+		if(evtsrc.tagName=="SPAN"){
+			evtsrc = evtsrc.parentNode;
+		}
+		
+		if(evtsrc.getAttribute("type")!="contextmenu_item"){
+			cm.style.display="none";
+			
+		}
+		
+	}
+	
+	return false;
+}
+
+//删除报表
+function removeReportFile(){
+
+	var guid=currentSelectedTemplate.getAttribute("guid");
+
+	$.ajax({
+	    url: "mrReportAction!deleteReportByGuid",
+	    type: "post",
+	    data: {"mrReport.guid":guid},
+	    dataType: "json",
+	    async:false,
+	    success: function(data){
+	    	//如果当前删除的报表是当前打开的，则重置两个变量值，确保保存时执行另存为。
+	    	var report = window.parent.getWindow("HTMLExcel");
+	    	
+	    	if(report.current_queried_report!=null){
+
+		    	if(report.current_queried_report.name==currentSelectedTemplate.getAttribute("name")){
+
+		    		report.report_case="new";
+		    		report.current_queried_report=null;
+		    	};
+	    	}
+
+	    	window.location.reload();
+	    },
+	    error:function(msg){
+	    	jAlert("删除时发生错误！");
+	    }
+	});
+	
+	
+}
+
+
+
+$(document).ready(function(){
+	showReports();
+	
+	
+
+	//初始化右键菜单
+	var contextmenu = document.getElementById("contextmenu");
+	var items = contextmenu.getElementsByTagName("li");
+	for(var i=0;i<items.length;i++){
+		items[i].setAttribute("type","contextmenu_item");
+		items[i].onmouseup=function(){
+			contextmenu.style.display="none";
+		}
+	}
+	
+	
+});
+
+</script>
+
+</head>
+<body>
+	<div class="container" style="float:left;width:440px;height:254px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:418px;height:246px;margin-top:4px;margin-left:8px;">
+			
+			
+			
+			
+			
+			
+			
+			<div style="width:416px;height:30px;">
+				查找范围(I):<select style="width:210px;" readonly="readonly">
+								<option>考生文件夹</option>
+							</select>
+							<img src="images/iconcolumn.jpg" style="margin-left:10px;margin-top:3px;position:absolute;"/>
+			</div>
+			
+			<ul id="fileList">
+			
+			</ul>
+			
+			<div style="width:416px;">
+				<table border="0">
+					<tr>
+						<td>文件名(N):</td>
+						<td><input type="text" style="width:240px;"/></td>
+						<td><input type="button" class="button" value="打开" onclick="openIt()"/></td>
+					</tr>
+					<tr>
+						<td>文件类型(T):</td>
+						<td>
+							<select style="width:240px;">
+								<option>UFO报表文件(*.rep)</option>
+							</select>
+						</td>
+						<td><input type="button" class="button" value="取消" onclick="window.parent.closeWindow('HTMLExcel_openReport')"/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="checkbox" id="readonly"/><label for="readonly">以只读方式打开(R)</label></td>
+						<td><input type="button" class="button" value="帮助(H)" onclick=""/></td>
+					</tr>
+				</table>
+			</div>
+			
+			
+		
+		</div>
+	</div>
+	
+	
+	
+
+	<!-- 右键菜单 S -->
+    <ul id="contextmenu" class="contextmenu" style="width:80px;display:none;top:0px;left:0px;">
+    	
+    	
+    	<li onclick="openIt()"><span>打开</span></li>
+    	<li onclick="removeReportFile();"><span>删除</span></li>
+    	
+    
+    </ul>
+	<!-- 右键菜单 E -->
+	
+	
+	
+	
+</body>
+</html>

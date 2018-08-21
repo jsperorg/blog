@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新建</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<style type="text/css"> 
+.li_1 {list-style:none;width:280px;height:18px;line-height:16px;background-image:url('images/icon/folder.gif');background-repeat:no-repeat;background-position:2px 3px;padding-left:20px;padding-top:1px;padding-right:0px;cursor:default;font-family:宋体;};
+.templatebox {}
+.templatebox li {list-style:none;width:90px;height:78px;text-align:center;float:left;}
+.templatebox li img {margin:5px;}
+.templatebox li label {padding:0;}
+</style>
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunctionForCell.js"></script>
+<script type="text/javascript">
+
+
+//当前选中的模板分类项
+var currentSelectedItem = null;
+
+//当前选择的模板文件
+var currentSelectedTemplate = null;
+
+
+
+$(document).ready(function(){
+	
+	//查询模板分类并显示
+	
+
+	//查询并初始化模板类别下拉列表
+	$.ajax({
+	    url: "mrClassAction!findAllClass",
+	    type: "post",
+	    dataType: "json",
+	    async:false,
+	    success: function(mrClassList){
+	    	
+	    	if(mrClassList!=null){
+	    		var div = $("#itemKindList");
+	    		for(var i=0;i<mrClassList.length;i++){
+	    			
+	    			div.append("<li class='li_1' onclick='doSelect(this)'  id='"+mrClassList[i].guid+"'>"+mrClassList[i].className+"</li>");
+	    			
+	    		}
+	    		
+	    	}
+
+	    	loadModel(mrClassList[0].guid);
+	    	
+	    },
+	    error:function(msg){
+	    	jAlert("发生错误！");
+	    }
+	});
+
+	
+});
+
+
+//打开模板文件
+function openIt(e){
+	 
+	   
+	   if(currentSelectedTemplate==null){
+		   jAlert("请选择模板。");
+	   }else{
+
+		   if(e==undefined || e==null){
+			   e=currentSelectedTemplate;
+		   }
+		   
+		   var reportName = $(e).attr("filename");
+
+			var guid= $(e).attr("guid");
+			var obj= {name:reportName,guid:guid};
+			
+		   window.parent.deliverValue("HTMLExcel_newReport",obj);
+		   window.parent.closeWindow("HTMLExcel_newReport");
+		   
+	   }
+}
+
+function dbopenIt(e){
+	templateSelect(e);
+	openIt(e);
+}
+
+function loadModel(classId){
+	
+	
+	$.ajax({
+	    url: "mrReportTemplateAction!findReportTemplateByClassId?classId="+classId,
+	    type: "post",
+	    //data: param,
+	    dataType: "json",
+	    async:false,
+	    success: function(mrReportList){
+	    	
+	    	var dl = mrReportList;
+	    	currentSelectedTemplate=null;
+	    	$("#itemList").html("");
+	    	$.each(dl,function(key,obj){
+	    		
+				var str = "<li guid='"+obj.guid+"' filename='"+obj.name+"' ondblclick='dbopenIt(this);' onmousedown='templateSelect(this);' ><img src='images/icon/mrpage.gif'><br><label>"+obj.name+"</label></li>";
+				$("#itemList").append(str); 
+    	   });
+	    	
+	    	
+	    },
+	    error:function(msg){
+	    	jAlert("发生错误！");
+	    }
+	});
+	
+	
+	
+	
+}
+
+function show(e){
+
+    $("#legend2").html(e.innerHTML);
+    
+	
+	loadModel(e.id);
+}
+
+
+
+//左边列表项选中处理方法
+function doSelect(tem){
+	show(tem);
+	if(currentSelectedItem != null){
+		currentSelectedItem.style.backgroundColor = "";
+		currentSelectedItem.style.color = "";
+	}
+	
+	tem.style.backgroundColor = "#0a246a";
+	tem.style.color = "#fff";
+	currentSelectedItem = tem;
+}
+
+function doAppend(tem){
+	
+}
+
+//模板选择函数
+function templateSelect(tem){
+	
+	if(currentSelectedTemplate!=null && currentSelectedTemplate != tem){
+		var img = currentSelectedTemplate.getElementsByTagName("img")[0];
+		img.src="images/icon/mrpage.gif";
+		var label = currentSelectedTemplate.getElementsByTagName("label")[0];
+		label.style.backgroundColor = "#fff";
+		label.style.color = "#000";
+	}
+	var img = tem.getElementsByTagName("img")[0];
+	img.src="images/icon/mrpage_selected.gif";
+	var label = tem.getElementsByTagName("label")[0];
+	label.style.backgroundColor = "#0a246a";
+	label.style.color = "#fff";
+	currentSelectedTemplate = tem;
+	
+}
+</script>
+</head>
+<body>
+	<div class="container" style="float:left;width:620px;height:386px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:592px;height:370px;margin-top:14px;margin-left:12px;">
+			
+			<div style="width:100%;height:16px;text-align:right;">
+				<div style="float:right;">
+					<img src="images/icon/bigico.gif" style="margin-right:2px;" border="0"/>
+					<img src="images/icon/smallico.gif" style="margin-right:2px;" border="0"/>
+					<img src="images/icon/listico.gif" style="margin-right:2px;" border="0"/>
+				</div>
+			</div>
+		
+			<div style="width:100%;height:312px;">
+				
+				
+				<fieldset style="width:238px;height:310px;float:left;margin:0px;padding:0px;">
+					<legend>模板分类</legend>
+					<ul id="itemKindList" style="width:220px;height:278px;border:2px inset #ccc;margin-top:4px;margin-left:7px;background-color:#fff;padding:0px;overflow-x:hidden;">
+					   
+					</ul>
+				
+				</fieldset>
+					
+				<fieldset style="width:334px;height:310px;float:left;margin-left:10px;padding:0px;">
+					<legend id = "legend2">常用模板</legend>
+					<ul id="itemList" class="templatebox" style="width:316px;height:278px;border:2px inset #ccc;margin-top:4px;margin-left:7px;background-color:#fff;padding:0px;overflow:auto;">
+						
+					</ul>
+				</fieldset>
+				
+				
+			</div>
+			
+			<div style="width:100%;height:30px;margin-top:10px;text-align:right;">
+				<input id = "button1" type="button" value="确定"  onclick="openIt()"/>
+				<input type="button" value="取消" onclick="window.parent.closeWindow('HTMLExcel_newReport')"/>
+			</div>
+			
+			
+		</div>
+	</div>
+</body>
+</html>

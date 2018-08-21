@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>设置关键字</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunctionForCell.js"></script>
+<style type="text/css">
+*{font-family:宋体;}
+</style>
+
+<script>
+
+
+$(function(){
+	var keyword = null;
+	 $("#ok").click(
+			function(){
+				
+				if($('input[name="rd_1"]:checked').val()==undefined){
+					jAlert("请选择一个关键字");
+					return;
+				}
+				
+				
+				if($('input[name="rd_1"]:checked').val()=="年"){
+					keyword = "year";
+				}
+				if($('input[name="rd_1"]:checked').val()=="月"){
+					keyword = "month";
+				}
+				
+				if($('input[name="rd_1"]:checked').val()=="日"){
+					keyword = "day";
+				}
+				if($('input[name="rd_1"]:checked').val()=="季"){
+					keyword = "quarter";
+				}
+				if($('input[name="rd_1"]:checked').val()=="单位名称"){
+					
+					keyword = "unitName";
+				}
+				if($('input[name="rd_1"]:checked').val()=="单位编号"){
+					keyword = "unitNumber";
+				}
+				if($('input[name="rd_1"]:checked').val()=="自定义关键字"){
+					//window.dialogArguments.selfDefinedName=$("#selfDefinedName").val();
+					//window.dialogArguments.selfDefinedValue=$("#selfDefinedValue").val();
+				}
+				
+				window.parent.deliverValue("HTMLExcel_setKeyword",keyword);
+	
+				window.parent.closeWindow("HTMLExcel_setKeyword");
+
+			}
+	); 
+});
+//
+function setDisabled(t){
+	//alert(t.id);
+	if(t.id=="rd_1_7"){
+		$("#selfDefinedName").attr('disabled',false);
+		$("#selfDefinedValue").attr('disabled',false);
+		$("#keyvalue").attr('disabled',true);
+	}else{
+		$("#selfDefinedName").attr('disabled',true);
+		$("#selfDefinedValue").attr('disabled',true);
+		$("#keyvalue").attr('disabled',false);
+	}
+	
+	
+}
+</script>
+
+
+
+</head>
+<body>
+	<div class="container" style="float:left;width:300px;height:180px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:270px;height:150px;margin-top:18px;margin-left:16px;">
+			
+			<div style="width:200px;height:100%;float:left;">
+				
+				<div style="width:100%;height:65px;line-height:26px;" class="v_a_m">
+					
+					<input type="radio" name="rd_1" id="rd_1_1" style="margin-left:14px;" value="单位名称" onclick="setDisabled(this);"/><label for="rd_1_1">单位名称</label>
+					<input type="radio" name="rd_1" id="rd_1_2" style="margin-left:16px;" value="年" onclick="setDisabled(this);"/><label for="rd_1_2">年</label>
+					<input type="radio" name="rd_1" id="rd_1_3" style="margin-left:16px;" value="月" onclick="setDisabled(this);"/><label for="rd_1_3">月</label><br/>
+					
+					<input type="radio" name="rd_1" id="rd_1_4" style="margin-left:14px;" value="单位编号" onclick="setDisabled(this);"/><label for="rd_1_4">单位编号</label>
+					<input type="radio" name="rd_1" id="rd_1_5" style="margin-left:16px;" value="季" onclick="setDisabled(this);"/><label for="rd_1_5">季</label>
+					<input type="radio" name="rd_1" id="rd_1_6" style="margin-left:16px;" value="日" onclick="setDisabled(this);"/><label for="rd_1_6">日</label>
+					
+				</div>
+
+				<fieldset style="width:100%;height:80px;padding:0px;margin:0px;">
+					<legend class="v_a_m"><input type="radio" name="rd_1" id="rd_1_7" value="自定义关键字"  onclick="setDisabled(this);"><label for="rd_1_7">自定义关键字</label></legend>
+					<div style="margin-left:16px;margin-top:8px;">
+						类型：数值（1-30000）<br><br>
+						名称：<input id="selfDefinedName" type="text" disabled="disabled" style="width:90px;"/><br/>
+					</div>
+				</fieldset> 
+							
+				
+			</div>
+			
+			<div style="width:70px;height:100%;float:left;padding-top:80px;text-align:right;">
+				<input id="ok" type="button" value="确定" /><br><br><input type="button" value="取消" onclick="window.parent.closeWindow('HTMLExcel_setKeyword')"/>
+			</div>
+			
+		
+		</div>
+	</div>
+</body>
+</html>

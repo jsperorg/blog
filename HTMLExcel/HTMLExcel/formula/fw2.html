@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>公式向导</title>
+	<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+	<style type="text/css">
+		tr{height:26px;}
+		td{padding:0px;margin:0px;}
+	</style>
+	<!-- 引入jquery组件 -->
+	<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="/exam_t/js/publicFunctionForCell.js"></script>
+	<script type="text/javascript" src="/exam_t/js/My97DatePicker/WdatePicker.js"></script>
+	
+	<script type="text/javascript">
+	
+	
+	
+	$(document).ready(function(){
+		initItems(selFuncName);
+		
+	});
+	
+	
+	
+	
+function openReference(id){
+	action=id;
+	
+	if(id == "codeid"){
+		window.parent.openWindow("dsign_subjectsreference","HTMLExcel_formula_fw2");
+	}
+	
+	if(id == "dfcodeid"){
+		window.parent.openWindow("dsign_subjectsreference","HTMLExcel_formula_fw2");
+	}
+	
+	if(id == "personid"){
+		window.parent.openWindow("basic_comref_personref","HTMLExcel_formula_fw2");
+	}
+	if(id == "cusid"){
+		window.parent.openWindow("basic_comref_cusref","HTMLExcel_formula_fw2");
+	}
+	if(id == "supid"){
+		window.parent.openWindow("basic_comref_supref","HTMLExcel_formula_fw2");
+	}
+	if(id == "deptid"){
+		window.parent.openWindow("basic_comref_dptref","HTMLExcel_formula_fw2");
+	}
+	if(id == "itemid"){
+		window.parent.openWindow("basic_comref_fitemref","HTMLExcel_formula_fw2");
+		
+	}
+	
+	
+	
+}
+
+//确定
+function returnvalue(){
+	if(conversioncode_s('code',$("#codeid"))){
+		getFuncString();
+	}
+	
+}
+
+
+function closeWindow(){
+
+	window.parent.closeWindow("HTMLExcel_formula_fw2");
+}
+
+//弹窗回调方法
+function deliverValue(param){
+	
+	switch(action){
+	
+		//科目
+	case "codeid":
+		$("#codeid").val(param.selKemuCode);
+		 //判断辅助项情况
+	    loadCode(param.selKemuCode);
+		break;
+
+		//对方科目
+	case "dfcodeid":
+		$("#dfcodeid").val(param.selKemuCode);
+		 //判断辅助项情况
+	    loadCode(param.selKemuCode);
+		break;
+
+		//个人
+	case "personid":
+		$("#personid").val(param.ccode);
+		break;
+
+		//客户
+	case "cusid":
+		$("#cusid").val(param.ccode);
+		break;
+
+		//供应商
+	case "supid":
+		$("#supid").val(param.ccode);
+		break;
+
+		//部门
+	case "deptid":
+		$("#deptid").val(param.ccode);
+		break;
+
+		//项目
+	case "itemid":
+		$("#itemid").val(param.gradecode);
+		$("#citemid").val(param.citemId);
+		break;
+
+		
+	}
+}
+
+
+	</script>
+	
+</head>
+<body>
+	<div class="container" id="container" style="width:350px;height:360px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:320px;height:350px;margin-left:10px;margin-top:10px;">
+			<div style="text-align:left;margin-top:10px;">
+				<table style="border-collapse:collapse;">
+				   <tr><td>函数名称</td><td><input disabled="disabled" type="text"  id="funcName" style="width:160px;"/></td></tr>
+				  <!--  <tr><td>函数说明</td><td><input disabled="disabled" type="text"  id="funcDesc" style="width:160px;"/></td></tr> -->
+				   <tr id="tr_selyear"><td>会计年度</td><td><select id= "selyear" disabled="disabled" style="width:185px;">
+						    <option>年</option>
+						</select></td></tr>
+<tr id="tr_codeid"><td style="color: red;">科目编码*</td><td><input type="text"  onkeyup="loadCode(this.value);"     onblur= "target='codeid';conversioncode_s('code',this);loadCode(this.value)" 
+id="codeid" style="width:160px;"/><input type="button" class="finder" onclick="javascript:openReference('codeid')"/></td></tr>
+				  
+				   <tr id="tr_dfcodeid"><td style="color: red;">对方科目*</td><td><input  type="text"   onblur= "loadCode(this.value)" id="dfcodeid" style="width:160px;"/><input type="button" class="finder" onclick="javascript:openReference('dfcodeid')"/></td></tr>
+				  
+				   <tr id="tr_selperiod"><td style="color: red;">会计期间*</td><td><select  id= "selperiod" onblur= "javascript:period()" style="width:185px;">
+							<option value="" selected="selected"></option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="30">30</option>
+							<option value="月">月</option>
+							<option value="全年">全年</option>
+							
+						</select></td></tr>
+				   <tr id="tr_selfx"><td style="color: red;">方&#12288;&#12288;向*</td><td>
+				        <select id = "selfx" style="width:185px;">
+							<option>借</option>
+							<option>贷</option>
+						</select></td></tr>
+				   <tr id="tr_beginDate"><td>起始日期</td><td><input id="beginDate" type="text" style="width:160px;" onclick="WdatePicker()"/><input type="button" class="picker" onclick="document.getElementById('endDate').click();"/></td></tr>
+				   <tr id="tr_endDate"><td>截至日期</td><td><input id="endDate" type="text" style="width:160px;" onclick="WdatePicker()"/><input type="button" class="picker" onclick="document.getElementById('endDate').click();"/></td></tr>
+				   
+				    <tr id="tr_digest"><td >摘要</td><td><input  type="text"    id="digest" style="width:160px;"/></td></tr>
+				    <tr id="tr_ppfs">
+				       <td >匹配方式</td>
+				       <td>
+					        <select  id = "ppfs" style="width:185px;">
+								<option>=</option>
+								<option>==</option>
+							</select>
+						</td>
+					</tr>
+					
+					
+					 <tr id="tr_bz">
+				       <td >币种</td>
+				       <td>
+					        <select  id = "bz" style="width:185px;">
+								<option>美元</option>
+								<option>英镑</option>
+							</select>
+						</td>
+					</tr>
+					<tr id="tr_hllx">
+				       <td >汇率类型</td>
+				       <td>
+					        <select  id = "hllx" style="width:185px;">
+								<option>固定</option>
+								<option>浮动</option>
+								<option>调整</option>
+							</select>
+						</td>
+					</tr>
+						
+				   <tr id="tr_isInclude"><td>包含未记账凭证</td><td>
+				        <select id = "isInclude" style="width:184px;">
+							<option>否</option>
+							<option>是</option>
+						</select></td></tr>
+				   <tr id="tr_personid"><td>个&#12288;&#12288;人&nbsp;</td><td><input readonly="readonly"  disabled="disabled" type="text" id="personid" style="width:160px;background-color: #808080;"/><input disabled="disabled" id = "personbtn" type="button" class="finder" onclick="javascript:openReference('personid')"/></td></tr>
+				   <tr id="tr_cusid"><td>客&#12288;&#12288;户</td><td><input readonly="readonly" disabled="disabled" type="text" id="cusid" style="width:160px;background-color: #808080;"/><input disabled="disabled" id = "cusbtn" type="button" class="finder" onclick="javascript:openReference('cusid')"/></td></tr>
+				   <tr id="tr_supid"><td>供 应 商&nbsp;&nbsp;</td><td>                                 <input  disabled="disabled" type="text" id="supid" style="width:160px;background-color: #808080;"/><input disabled="disabled" id = "supbtn" type="button" class="finder" onclick="javascript:openReference('supid')"/></td></tr>
+				   <tr id="tr_deptid"><td>部&#12288;&#12288;门&nbsp;</td><td><input readonly="readonly" direadonly="readonly"sabled="disabled" type="text" id="deptid" style="width:160px;background-color: #808080;"/><input disabled="disabled" id = "deptbtn" type="button" class="finder" onclick="javascript:openReference('deptid')"/></td></tr>
+				   <tr id="tr_itemid"><td>项&#12288;&#12288;目&nbsp;</td><td><input  readonly="readonly"  disabled="disabled" type="text" id="itemid" style="width:160px;background-color: #808080;"/><input disabled="disabled" id = "itembtn"  type="button" class="finder" onclick="javascript:openReference('itemid')"/></td></tr>
+				<input  disabled="disabled" type="hidden" id="citemid" />
+				</table>
+			</div>
+			<div style="width:100%;height:26px;text-align:right;">
+				<input type="button" value="确定" onclick="returnvalue()"/>&nbsp;
+				<input type="button" value="取消" onclick="closeWindow()"/>&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+
+	//获取父窗体传来的值
+	var selFuncName = window.parent.valueMap.get("HTMLExcel_formula_fw2");
+	selFuncName = selFuncName.toUpperCase();
+	document.getElementById("funcName").value=selFuncName ;
+	
+	document.getElementById("codeid").focus();
+</script>
+
+<script type="text/javascript" src="formula/js/fw2.js"></script>
+
+</html>

@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>选项</title>
+	<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+	<script type="text/javascript" src="/exam_t/js/winui/winui.js"></script>
+	<link rel="stylesheet" type="text/css" href="/exam_t/css/tab.css">
+	<script type="text/javascript" src="/exam_t/js/winui/plugin/winui.tab.js"></script>
+	<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunction.js"></script>
+	<style type="text/css">
+		.diabeldtd{border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #000;border-bottom:1px solid #000;background-color:#D4D0C8;text-align:center;}
+	</style>
+	<script type="text/javascript">
+		
+	
+	
+
+	//递计算框递增函数
+	function increasing(btn){
+		var input = btn.parentNode.parentNode.parentNode.getElementsByTagName('input')[0];
+		input.value = parseInt(input.value)+1;
+	}
+	
+	//递计算框递减函数
+	function decline(btn){
+		var input = btn.parentNode.parentNode.parentNode.getElementsByTagName('input')[0];
+		input.value = parseInt(input.value)-1;
+	}
+	
+	
+
+	//hashMap数据结构
+	function hashMap(){
+		var map = {
+				put 	 : function(key,value){this[key] = value;},
+				get 	 : function(key){return this[key];},
+				contains : function(key){return this.get(key) == null?false:true;},
+				remove 	 : function(key){delete this[key];},
+				keySet   : function(){
+					var keys = {};
+					for(var key in this){
+						if(key!="put" && key!="get" && key!="contains" && key!="remove" && key!="keySet"){
+							keys[key]=null;
+						}
+					}
+					return keys;
+				}
+					
+				};
+		return map;
+	}
+
+	
+	var styleMap = new hashMap();
+	
+
+	//字体
+	function fontFamilyChange(select){
+		var t = select.options[select.selectedIndex].text;
+		if(t!="默认")
+		document.getElementById("view").style.fontFamily=t;
+	}
+	
+	
+	function clearStyle(view){
+
+		view.style.fontFamily="";
+		view.style.fontWeight="";
+		view.style.fontStyle="";
+		view.style.textDecoration="";
+	}
+	
+	//样式
+	function fontStyleChange(select){
+		
+		var view = document.getElementById("view");
+		
+		var v = select.options[select.selectedIndex].text;
+		clearStyle(view);
+		switch(v){
+		case "普通":
+			clearStyle(view);
+			
+			
+			
+			break;
+		case "粗体":
+			view.style.fontWeight="bold";
+			break;
+		case "斜体":
+			view.style.fontStyle="italic";
+			break;
+		case "下划线":
+			view.style.textDecoration="underline";
+			break;
+		case "粗斜体":
+			view.style.fontWeight="bold";
+			view.style.fontStyle="italic";
+			break;
+		case "粗下划线":
+			view.style.fontWeight="bold";
+			view.style.textDecoration="underline";
+			break;
+		case "斜下划线":
+			view.style.fontStyle="italic";
+			view.style.textDecoration="underline";
+			break;
+		case "粗斜下划线":
+			view.style.fontWeight="bold";
+			view.style.fontStyle="italic";
+			view.style.textDecoration="underline";
+			break;
+		}
+		
+		
+		
+		
+	}
+	
+	//字号
+	function fontSizeChange(select){
+		var t = select.options[select.selectedIndex].text;
+		if(t!="默认")
+		document.getElementById("view").style.fontSize=t+"px";
+		
+		
+	}
+	
+	//前景色
+	function foregroundChange(select){
+		var t = select.options[select.selectedIndex].text;
+		if(t!="无"){
+			select.style.backgroundColor=select.value;
+			document.getElementById("view").style.color=select.value;
+		}
+	}
+	
+	//背景色
+	function backgroundChange(select){
+		var t = select.options[select.selectedIndex].text;
+		if(t!="无"){
+			select.style.backgroundColor=select.value;
+			document.getElementById("view").style.backgroundColor=select.value;
+		}
+	}
+	
+	//确定按钮
+	function btnConfirm(){
+
+		var fontFamily = document.getElementById("fontFamily");
+		var t = fontFamily.options[fontFamily.selectedIndex].text;
+		if(t!="默认"){
+			styleMap.put("fontFamily",t);
+		}
+
+
+		var fontStyle = document.getElementById("fontStyle");
+		var v = fontStyle.options[fontStyle.selectedIndex].text;
+		
+		switch(v){
+		case "普通":
+			styleMap.put("fontFamily","");
+			styleMap.put("fontWeight","");
+			styleMap.put("fontStyle","");
+			styleMap.put("textDecoration","");
+			break;
+		case "粗体":
+			styleMap.put("fontWeight","bold");
+			break;
+		case "斜体":
+			styleMap.put("fontStyle","italic");
+			break;
+		case "下划线":
+			styleMap.put("textDecoration","underline");
+			break;
+		case "粗斜体":
+			styleMap.put("fontWeight","bold");
+			styleMap.put("fontStyle","italic");
+			break;
+		case "粗下划线":
+			styleMap.put("fontWeight","bold");
+			styleMap.put("textDecoration","underline");
+			break;
+		case "斜下划线":
+			styleMap.put("fontStyle","italic");
+			styleMap.put("textDecoration","underline");
+			break;
+		case "粗斜下划线":
+			styleMap.put("fontWeight","bold");
+			styleMap.put("fontStyle","italic");
+			styleMap.put("textDecoration","underline");
+			break;
+		}
+		
+
+
+		var fontSize = document.getElementById("fontSize");
+		var t = fontSize.options[fontSize.selectedIndex].text;
+		if(t!="默认"){
+			styleMap.put("fontSize",t+"px");
+		}
+
+		var foreground = document.getElementById("foreground");
+		if(foreground.value!="无"){
+			styleMap.put("color",foreground.value);
+		}
+
+		var background = document.getElementById("background");
+		if(background.value!="无"){
+			styleMap.put("backgroundColor",background.value);
+		}
+
+		var param = new Object();
+		param.styleMap = styleMap;
+		//TODO :put other object in here. 
+		
+    		window.parent.deliverValue("HTMLExcel_setCellProperties",param);
+    		window.parent.closeWindow('HTMLExcel_setCellProperties');
+	}
+	
+	
+	
+	
+	
+	
+	
+	</script>
+</head>
+<body>
+	<form id="form1" name="form1">
+		<div class="container" id="container" style="float:left;width:394px;height:264px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+			<div style="width:376px;height:264px;margin-left:6px;margin-top:6px;">
+				<div type="tab" active="1">
+					<div>
+						<div onclick="return false;" style="color:#808080">单元类型</div>
+						<div>字体图案</div>
+						<div onclick="return false;" style="color:#808080">对齐</div>
+						<div onclick="return false;" style="color:#808080">边框</div>
+					</div>
+					<div style="width:376px;height:200px;">
+						<div>
+							<div style="margin-top:10px;margin-left:10px;">
+
+							</div>
+						</div>
+						<div>
+							<div style="margin-left:6px;margin-top:6px;">
+								<div>
+									<div style="float:left;">
+										<fieldset style="width:150px;">
+											<legend>字体</legend>
+											<div>
+												<div>
+													<label>字体</label>
+													<select id="fontFamily" style="width:100px;" onchange="fontFamilyChange(this);">
+														<option>默认</option>
+														<option>宋体</option>
+														<option>仿宋_GB2312</option>
+														<option>楷体</option>
+														<option>黑体</option>
+														<option>隶书</option>
+													</select>
+												</div>
+												<div>
+													<label>字型</label>
+													<select id="fontStyle" style="width:100px;" onchange="fontStyleChange(this);">
+														<option>普通</option>
+														<option>粗体</option>
+														<option>斜体</option>
+														<option>下划线</option>
+														<option>斜体</option>
+														<option>下划线</option>
+														<option>粗斜体</option>
+														<option>粗下划线</option>
+														<option>粗斜下划线</option>
+													</select>
+												</div>
+												<div>
+													<label>字号</label>
+													<select id="fontSize" style="width:100px;" onchange="fontSizeChange(this);">
+														<option>默认</option>
+														<option>9</option>
+														<option>10</option>
+														<option>11</option>
+														<option>12</option>
+														<option>13</option>
+														<option>14</option>
+														<option>15</option>
+														<option>16</option>
+														<option>17</option>
+														<option>18</option>
+														<option>19</option>
+														<option>20</option>
+														<option>21</option>
+														<option>22</option>
+														<option>23</option>
+														<option>24</option>
+														<option>25</option>
+													</select>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+									<div style="float:left;">
+										<fieldset style="width:150px;">
+											<legend>颜色图案</legend>
+											<div>
+												
+												<div>
+													<label>前景色</label>
+													<select id="foreground" style="width:100px;" onchange="foregroundChange(this);">
+														<option value="无" selected>无</option>
+														<option value="#C0C0C0" style="background-color:#C0C0C0"></option>
+														<option value="#888888" style="background-color:#888888"></option>
+														<option value="#000000" style="background-color:#000000"></option>
+														<option value="#0000ff" style="background-color:#0000ff"></option>
+														<option value="#00ff00" style="background-color:#00ff00"></option>
+														<option value="#ff0000" style="background-color:#ff0000"></option>
+													</select>
+												</div>
+												<div>
+													<label>背景色</label>
+													<select id="background" style="width:100px;" onchange="backgroundChange(this);">
+														<option value="无" selected>无</option>
+														<option value="#C0C0C0" style="background-color:#C0C0C0"></option>
+														<option value="#888888" style="background-color:#888888"></option>
+														<option value="#000000" style="background-color:#000000"></option>
+														<option value="#0000ff" style="background-color:#0000ff"></option>
+														<option value="#00ff00" style="background-color:#00ff00"></option>
+														<option value="#ff0000" style="background-color:#ff0000"></option>
+													</select>
+												</div>
+												<div>
+													<label>图&#12288;案</label>
+													<select style="width:100px;">
+													</select>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+								
+								</div>
+								
+								
+								<fieldset style="width:170px;">
+									<legend>预览</legend>
+									<div id="view" style="background-color:#ffffff;border:1px solid #000000;height:50px;text-align:center;overflow:auto;">
+										<br>样本Sample
+									</div>
+								</fieldset>
+							</div>
+						</div>
+						<div>
+							<div style="margin-left:20px;">
+							</div>
+							
+						</div>
+
+						<div>
+
+
+
+						</div>
+					</div>
+				</div>
+				<div style="margin-top:4px;text-align:right;">
+					<input type="button" value="  确定  " onclick="btnConfirm();"/>
+					<input type="button" value="  取消  " onclick="window.parent.closeWindow('HTMLExcel_setCellProperties');"/>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

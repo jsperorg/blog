@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>取消关键字</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunction.js"></script>
+<style type="text/css">
+.button{width:80px;}
+</style>
+
+<script type="text/javascript">
+
+var keyword_cell_map = window.parent.valueMap.get("HTMLExcel_cancelKeyword");
+
+$(function(){
+	
+	var inputs = document.getElementsByTagName("input");
+	for(var i=0;i<inputs.length;i++){
+		if(inputs[i].type=="checkbox"){
+			$(inputs[i]).attr("disabled","disabled");
+			$(inputs[i]).css("background-color","#D4D0C8");
+		}
+	}
+
+	var keySet = keyword_cell_map.keySet();
+	for(var k in keySet){
+		$("#"+k).attr("disabled",false);
+		$("#"+k).css("background-color","");
+		var v = keyword_cell_map.get(k).getAttribute("value");
+		if(v!=null){
+			$("#"+k).val(v);
+		}
+	}
+
+
+	
+});
+
+
+//确定按钮
+function btnConfirm(){
+
+	var keySet = keyword_cell_map.keySet();
+	var keys = new Array();
+	for(var k in keySet){
+		
+		if($("#"+k).attr("checked")){
+			keys.push($("#"+k).attr("id"));
+		};
+		
+	}
+
+	window.parent.deliverValue("HTMLExcel_cancelKeyword",keys);
+	window.parent.closeWindow("HTMLExcel_cancelKeyword");
+}
+
+</script>
+
+</head>
+<body>
+	<div class="container" style="float:left;width:274px;height:130px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:240px;height:100px;margin-top:18px;margin-left:20px;">
+			
+			
+			<div style="width:140px;height:100%;float:left;">
+				
+				<table>
+					<tr>
+						<td><input type="checkbox" id="unitName"/></td><td width="78"><label for="unitName">单位名称</label></td>
+						<td valign="middle"><input type="checkbox" id="year"/></td><td><label for="year">年</label></td>
+					</tr>
+					<tr>
+						<td></td><td width="78"></td>
+						<td valign="middle"><input type="checkbox" id="quarter"/></td><td><label for="quarter">季</label></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="unitNumber"/></td><td width="78"><label for="unitNumber">单位编号</label></td>
+						<td valign="middle"><input type="checkbox" id="month"/></td><td><label for="month">月</label></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id=""/></td><td width="78"><label for="">自定义</label></td>
+						<td valign="middle"><input type="checkbox" id="month"/></td><td><label for="day">日</label></td>
+					</tr>
+				</table>
+				
+			</div>
+			
+			<div style="width:100px;height:100%;float:left;text-align:right;">
+				<br><br><br>
+				<input type="button" value="确认" onclick="btnConfirm()" class="button"/>
+				<input type="button" value="取消" onclick="window.parent.closeWindow('HTMLExcel_cancelKeyword')" class="button"/>
+			</div>
+			
+			
+			
+			
+		
+		
+		</div>
+	</div>
+</body>
+</html>

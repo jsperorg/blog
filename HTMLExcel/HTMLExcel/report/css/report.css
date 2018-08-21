@@ -1,0 +1,45 @@
+html,body{font-size:12px;font-family:宋体;}
+.ib{float:left;text-align:center;width:20px;height:19px;text-align:center;border:1px solid #D4D0C8;}
+.parallel{width:100%;margn-top:1px;border-top:1px solid #808080;border-bottom:1px solid #ffffff;}
+.bold_longitudinal{height:100%;margin-top:-2px;width:1px;border-left:1px solid #ffffff;border-right:1px solid #808080;float:left;background-color:#D4D0C8;margin-left:2px;}
+.thin_longitudinal{height:100%;margin-top:-2px;border-left:1px solid #808080;border-right:1px solid #ffffff;float:left;margin-left:3px;}
+.sort_longitudinal{height:19px;border-left:1px solid #808080;border-right:1px solid #ffffff;float:left;margin-left:3px;}
+.toolbar{height:24px;}
+.toolbar img{border:none;margin-top:3px;}
+
+.controlbar{width:16px;height:16px;float:left;padding:0;background-repeat:no-repeat;}
+
+.table_header {/* border-collapse:collapse; */cursor:default;font-size:14px;color:#87323c;}
+.table_header tr {background-color:#c0c0c0;height:20px;}
+.table_header td {border:1px solid #848484;border-left:1px solid #ffffff;text-align:center;}
+
+
+.table_lefter {cursor:default;font-size:12px;color:#87323c;}
+.table_lefter tr {background-color:#c0c0c0;height:20px;}
+.table_lefter td {border:1px solid #848484;border-top:1px solid #ffffff;text-align:center;}
+
+
+.table_bodyer {border-collapse:collapse;cursor:default;font-size:12px;}
+.table_bodyer tr {background-color:#ffffff;height:20px;}
+.table_bodyer td {border:1px solid #cccccc;overflow:hidden;}
+
+
+.table_bodyer_format {/* border-collapse:collapse; */cursor:default;font-size:12px;}
+.table_bodyer_format tr {background-color:#ffffff;height:20px;}
+.table_bodyer_format td {border:1px solid #ffffff;overflow:hidden;}
+
+
+
+.cell_border{/* display:none;position:absolute; */background-color:#000000;z-index:2000;}
+
+.contextmenu {width:140px;background-color:#D4D0C8;border:2px outset #cccccc;list-style:none;padding:0;margin:0;position:absolute;cursor:default;font-family:宋体;}
+.contextmenu hr{margin:3px;margin-left:0px;}
+.contextmenu ul{border:2px outset #cccccc;display:none;position:relative;top:-16px;left:98%;list-style:none;width:100%;padding:0;margin:0;}
+.contextmenu li{width:100%;height:20px;background-color:#D4D0C8;color:#000000;}
+.contextmenu li span{margin-left:20px;line-height:20px;}
+.contextmenu li:hover{background-color:#0a246a;color:#ffffff;}
+.contextmenu li:hover>ul{display:block;}
+
+
+.c{white-space:nowrap;width:inherit;height:inherit;border:none;}
+.b{border:1px solid #000000}

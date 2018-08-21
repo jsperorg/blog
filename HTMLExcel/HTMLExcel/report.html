@@ -1,0 +1,665 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>主界面</title>
+
+
+
+<link rel="stylesheet" type="text/css" href="report/css/report.css">
+<style type="text/css">
+
+
+</style>
+
+	<script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="../winui/winui.js"></script>
+	<script type="text/javascript" src="../winui/plugin/winui.menubar.xhtml1.0.js"></script>
+	<script type="text/javascript" src="report/js/report.js"></script>
+	<script type="text/javascript" src="report/js/variables.js"></script>
+	<script type="text/javascript" src="report/js/service.js"></script>
+
+<script type="text/javascript">
+
+
+
+$(document).ready(function(){
+	
+	reportTemplateUpdate = false;
+
+	buildReport(20,7);
+	report_case="new";
+	
+	
+	if(reportTemplateUpdate==true){
+
+		//修改报表标题;
+		window.parent.setWindowTitle("HTMLExcel","新模板");
+
+		//隐藏报表相关菜单
+		var hiddenMenus = [
+			//文件
+			"新建(N)",
+			"打开(O)",
+			"关闭(C)",
+			"保存(S)",
+			"另保存(A)..."
+		];
+		winui.setMenuDisplayByArray(hiddenMenus,"none");
+
+
+		//显示报表模板相关菜单
+		var showMenus = [
+			//文件
+			"新建模板",
+			"打开模板",
+			"保存模板",
+			"另保存模板"
+		];
+		winui.setMenuDisplayByArray(showMenus,"block");
+
+
+	}else{
+
+
+		//修改报表标题;
+		window.parent.setWindowTitle("HTMLExcel","新报表");
+		//默认弹出新建报表窗
+		//newReport();
+
+
+		//隐藏报表模板制作相关菜单
+		var hiddenMenus = [
+			//文件
+			"新建模板",
+			"打开模板",
+			"保存模板",
+			"另保存模板"
+		];
+		winui.setMenuDisplayByArray(hiddenMenus,"none");
+
+
+		//显示报表相关菜单
+		var showMenus = [
+			//文件
+			"新建(N)",
+			"打开(O)",
+			"关闭(C)",
+			"保存(S)",
+			"另保存(A)..."
+		];
+		winui.setMenuDisplayByArray(showMenus,"block");
+
+
+		//禁用一些菜单
+		var enabledMenus = [
+
+			//文件
+			"生成Excel",
+			"生成HTML",
+
+			//编辑
+			"剪切(T)",
+			"复制(C)",
+			"粘贴(P)",
+			"选择性粘贴[S]...",
+			"行",
+			"列",
+			"追加(B)",
+			"交换(X)",
+			"删除(D)",
+			"定位(M)",
+			"查找(F)",
+			"替换(R)",
+			"区域填充(E)",
+			"插入新对象...",
+			"对象属性...",
+			"对象外观...",
+			"链接...",
+			"对象(O)",
+			"录入(I)...",
+			"整表重算(A)...",
+			"透视(D)...",
+			"审核(C)...",
+			"舍位平衡(B)...",
+			"表页重算(P)...",
+			"表页不计算(N)...",
+			"数据采集...",
+
+			//格式
+			"行高(H)...",
+			"列宽(W)...",
+			"设置(S)..",
+			"重新设置...",
+			"取消(C)",
+			"格式加锁(L)...",
+			"格式解锁(U)",
+			"套用格式(A)...",
+			"自定义模板(U)...",
+			"报表模板(M)...",
+
+			//数据
+			"偏移(O)...",
+			"打印颜色(Y)",
+			"审核公式...",
+			"舍位公式...",
+			"公式列表(L)...",
+			"透视(D)...",
+			"表页(P)..",
+			"可变区(G)..",
+			"表页(P)...",
+			"可变区(G)...",
+			"审核(C)...",
+			"舍位平衡(B)...",
+			"表页不计算(N)...",
+			"数据采集...",
+			"账套初始[Y]...",
+			"取消组合",
+
+			//工具
+			"显示分页",
+			"强制分页",
+			"取消全部分页",
+			"计算器(A)...",
+			"字处理(Z)...",
+
+			//窗口
+			"层叠(C)",
+			"水平平铺(P)",
+			"垂直平铺(V)",
+			"排列图标(I)",
+			"拆分窗口",
+
+			//帮助
+			"财务报表帮助(H)",
+			"日积月累(P)..."
+
+		];
+
+
+
+		winui.setMenuEnabledByArray(enabledMenus,false);
+
+
+		
+		
+	}
+	
+	
+	//alert(calculateCell('QM("1001","月","借",,"年",,,,"是")'));
+	
+	
+	
+});
+
+
+</script>
+
+
+</head>
+<body style="background-color:#D4D0C8;">
+
+	<!-- 最外层容器 S -->
+	<div class="container" style="float:left;width:990px;height:410px;background-color: #D4D0C8;position:absolute;top:0px;left:3px;">
+	
+		<!-- 菜单栏 S -->
+		<div>
+		<div style="float:left;margin-top:2px;margin-left:4px;width:16px;height:16px;"><img src="report/images/report_sheet.jpg" border="0"/></div>
+		<div type="menubar" style="display:none;">
+				<div>
+					<div>文件(F)</div>
+					<div>
+						<div onclick="newReport();" style="display: none;">新建(N)</div>
+						<div onclick="openReport();" style="display: none;">打开(O)</div>
+						<div onclick="" style="display: none;">关闭(C)</div>
+						<div onclick="saveReport();" style="display: none;">保存(S)</div>
+						<div onclick="saveAsReport();" style="display: none;">另保存(A)...</div>
+						
+						
+						<div onclick="newReportTemplate();" style="display: none;">新建模板</div>
+						<div onclick="openReportTemplate();" style="display: none;">打开模板</div>
+						<div onclick="saveReportTemplate();" style="display: none;">保存模板</div>
+						<div onclick="saveAsReportTemplate();" style="display: none;">另保存模板</div>
+						
+						
+						<hr style="margin:3px;"/>
+						<div onclick="">生成Excel</div>
+						<div onclick="">生成HTML</div>
+						
+						<hr style="margin:3px;"/>
+						<hr style="margin:3px;"/>
+						<div onclick="window.parent.closeWindow('HTMLExcel')">退出(X)</div>
+					</div>
+				</div>
+				<div>
+					<div>编辑(E)</div>
+					<div>
+						<div onclick="editCut();">剪切(T)</div>
+						<div onclick="editCopy();">复制(C)</div>
+						<div onclick="editCopy();">粘贴(P)</div>
+						<div onclick="">选择性粘贴[S]...</div>
+						<div onclick="clearCell();">清除(A)</div>
+						<hr style="margin:3px;"/>
+						
+						<div>
+							<div onclick="">插入(I)</div>
+							<div>
+								<div onclick="">行</div>
+								<div onclick="">列</div>
+							</div>
+						</div>
+						
+						<div onclick="">追加(B)</div>
+						<div onclick="">交换(X)</div>
+						<div onclick="">删除(D)</div>
+						<hr style="margin:3px;"/>
+						<div onclick="">定位(M)</div>
+						<div onclick="">查找(F)</div>
+						<div onclick="">替换(R)</div>
+						<hr style="margin:3px;"/>
+						<div onclick="">区域填充(E)</div>
+						<hr style="margin:3px;"/>
+						<div onclick="formatDataChange()">格式/数据状态(Z)</div>
+						<hr style="margin:3px;"/>
+						<div onclick="">插入新对象...</div>
+						<div onclick="">对象属性...</div>
+						<div onclick="">对象外观...</div>
+						<div onclick="">链接...</div>
+						<div onclick="">对象(O)</div>
+						
+					</div>
+				</div>
+				<div>
+					<div>格式(S)</div>
+					<div>
+						<div onclick="setReportSize();">表尺寸(S)...</div>
+						<div onclick="rowHeight();">行高(H)...</div>
+						<div onclick="columnWidth();">列宽(W)...</div>
+						<div onclick="dragGridLine();/*regionalDrawLines();*/">区域画线(T)...</div>
+						<hr style="margin:3px;"/>
+						<div onclick="setCellProperties();">单元属性(O)...</div>
+						<div onclick="merge_cell();">组合单元(C)...</div>
+						<div onclick="split_cell();">取消组合单元格</div>
+						
+						<div>
+							<div onclick="">可变区(V)</div>
+							<div>
+								<div onclick="">设置(S)..</div>
+								<div onclick="">重新设置...</div>
+								<div onclick="">取消(C)</div>
+							</div>
+						</div>
+						
+						<hr style="margin:3px;"/>
+						
+						<div>
+							<div onclick="">保护(P)</div>
+							<div>
+								<div onclick="">格式加锁(L)...</div>
+								<div onclick="">格式解锁(U)</div>
+							</div>
+						</div>
+						
+						<hr style="margin:3px;"/>
+						<div onclick="">套用格式(A)...</div>
+						<div onclick="">自定义模板(U)...</div>
+						<div onclick="">报表模板(M)...</div>
+						
+					</div>
+				</div>
+				<div>
+					<div>数据(D)</div>
+					<div>
+					
+						<div>
+							<div onclick="">关键字(K)</div>
+							<div>
+								<div onclick="setKeyword()">设置(S)...</div>
+								<div onclick="enteringKeyword()">录入(I)...</div>
+								<div onclick="">偏移(O)...</div>
+								<div onclick="">打印颜色(Y)</div>
+								<div onclick="cancelKeyword()">取消(E)</div>
+							</div>
+						</div>
+						
+						
+						<hr style="margin:3px;"/>
+						
+						
+						<div>
+							<div onclick="">编辑公式(F)</div>
+							<div>
+								<div onclick="defineFormula()">单元公式...</div>
+								<div onclick="">审核公式...</div>
+								<div onclick="">舍位公式...</div>
+							</div>
+						</div>
+						
+						<div onclick="">公式列表(L)...</div>
+						<hr style="margin:3px;"/>
+						<div onclick="">透视(D)...</div>
+						
+						<div>
+							<div onclick="">排序</div>
+							<div>
+								<div onclick="">表页(P)..</div>
+								<div onclick="">可变区(G)..</div>
+							</div>
+						</div>
+						
+						<div>
+							<div onclick="">汇总(T)</div>
+							<div>
+								<div onclick="">表页(P)...</div>
+								<div onclick="">可变区(G)...</div>
+							</div>
+						</div>
+						
+						
+						
+						<div onclick="">审核(C)...</div>
+						<div onclick="">舍位平衡(B)...</div>
+						<hr style="margin:3px;"/>
+						<div onclick="calculateAll();">整表重算(A)...</div>
+						<div onclick="">表页重算(P)...</div>
+						<div onclick="">表页不计算(N)...</div>
+						<hr style="margin:3px;"/>
+						<div onclick="">数据采集...</div>
+						<hr style="margin:3px;"/>
+						<div onclick="">账套初始[Y]...</div>
+						
+						
+						<div onclick="">取消组合</div>
+					</div>
+				</div>
+				
+				
+				
+				<div>
+					<div>工具(T)</div>
+					<div>
+					
+						<div onclick="">显示分页</div>
+						<div onclick="">强制分页</div>
+						<div onclick="">取消全部分页</div>
+					
+						<hr style="margin:3px;"/>
+						<div onclick="">计算器(A)...</div>
+						<div onclick="">字处理(Z)...</div>
+						<hr style="margin:3px;"/>
+					
+						<div>
+							<div onclick="">自动求和(K)</div>
+							<div>
+								<div onclick="toRightSum();">向右(R)...</div>
+								<div onclick="toFootSum();">向下(W)...</div>
+							</div>
+						</div>
+						
+						
+						<hr style="margin:3px;"/>
+						<div onclick="defineFormula()">套用公式模板(Q)...</div>
+						
+						
+					</div>
+				</div>
+				
+				
+				
+				<div>
+					<div>窗口(T)</div>
+					<div>
+					
+						<div onclick="">层叠(C)</div>
+						<div onclick="">水平平铺(P)</div>
+						<div onclick="">垂直平铺(V)</div>
+						<div onclick="">排列图标(I)</div>
+					
+						<hr style="margin:3px;"/>
+						<div onclick="">拆分窗口</div>
+						
+					</div>
+				</div>
+				
+				
+				<div>
+					<div>帮助(H)</div>
+					<div>
+					
+						<div onclick="">财务报表帮助(H)</div>
+						<div onclick="">日积月累(P)...</div>
+						
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+		<!-- 菜单栏 E -->
+		
+		<!-- 工具栏 S -->
+		<div id="toolbar">
+		<div class="parallel"></div>
+		
+		<div class="toolbar" style="margin-top:2px;">
+			<div id="cell_name" style="width:118px;height:19px;border:1px solid #000;margin-left:10px;text-align:center;color:#777;font-size:14px;line-height:19px;float:left;">A2</div>
+			
+			<div class="ib" title="表页不计算" style="margin-left:4px;"><img id="jsq_icon" src="report/images/jsq_h.jpg"/></div>
+			<div class="ib" title="公式" onclick="fx_icon_click(this);"><img src="report/images/fx_c.jpg" style="margin-top:4px;"></div>
+			<div class="ib" title="输入取消" onclick="delete_icon_click(this);"><img style="margin-top:3px;" src="report/images/delete_h.jpg" id="delete_icon"/></div>
+			<div class="ib" title="输入确认" onclick="confirm_icon_click(this)"><img src="report/images/confirm_h.jpg" id="confirm_icon"/></div>
+			<div style="float:left;margin-left:10px;"><input type="text" id="showbox" style="width:740px;height:17px;border:1px solid #000;" onfocus="showbox_focus()" onblur="showbox_blur()"/></div>
+			
+			
+		</div>
+		
+		<div class="parallel"></div>
+
+		<div class="toolbar">
+			<div class="thin_longitudinal"></div>
+			
+			<div class="bold_longitudinal"></div>
+			
+			<div class="bold_longitudinal"></div>
+			
+			
+			<div id="format_model_toolbar" style="margin-top:2px;">
+				<div style="height:19px;float:left;margin-left:6px;">
+					<select id="toobarFontFamily" style="width:118px;" onchange="font_family_change(this);">
+						<option>宋体</option>
+						<option>仿宋_GB2312</option>
+						<option>楷体</option>
+						<option>黑体</option>
+						<option>隶书</option>
+					</select>
+				</div>
+				
+				<div style="height:19px;float:left;margin-left:5px;">
+					<select id="toobarFontSize" style="width:48px;" onchange="font_size_change(this);">
+						<option>9</option>
+						<option>10</option>
+						<option>11</option>
+						<option>12</option>
+						<option>13</option>
+						<option>14</option>
+						<option>15</option>
+						<option>16</option>
+						<option>17</option>
+						<option>18</option>
+						<option>19</option>
+						<option>20</option>
+						<option>21</option>
+						<option>22</option>
+						<option>23</option>
+						<option>24</option>
+						<option>25</option>
+					</select>
+				</div>
+				
+				<div class="ib" title="粗体" id="boolbarB" onclick="toolbar_b();" style="margin-left:6px;"><img src="report/images/b_c.jpg" style="margin-top:4px;"/></div>
+				<div class="ib" title="斜体" id="boolbarI" onclick="toolbar_i();"><img src="report/images/i_c.jpg" style="margin-top:4px;"/></div>
+				<div class="ib" title="下划线" id="boolbarU" onclick="toolbar_u();"><img style="margin-top:4px;" src="report/images/u_c.jpg"/></div>
+				
+				<div class="sort_longitudinal"></div>
+			
+				<div class="ib" title="居左" onclick="toolbar_zdq();"><img src="report/images/zdq_c.jpg"/></div>
+				<div class="ib" title="水平居中" onclick="toolbar_jzdq();"><img src="report/images/jzdq_c.jpg"/></div>
+				<div class="ib" title="居右" onclick="toolbar_ydq();"><img src="report/images/ydq_c.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="行高"><img src="report/images/shg_c.jpg"/></div>
+				<div class="ib" title="列宽"><img src="report/images/slk_c.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="逗号"><img src="report/images/douhao_c.jpg" style="margin-top:6px;"/></div>
+				<div class="ib" title="百分号"><img src="report/images/bfh_c.jpg" style="margin-top:4px;"/></div>
+				<div class="ib" title="货币符号"><img src="report/images/myf_c.jpg" style="margin-top:4px;"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="小数位数增加（2位）"><img src="report/images/xsdz_h.jpg"/></div>
+				<div class="ib" title="小数位数减少（2位）"><img src="report/images/xsdy_h.jpg"/></div>
+			</div>
+			
+			
+			<div class="thin_longitudinal"></div>
+			
+			<div class="bold_longitudinal"></div>
+			
+			<div class="bold_longitudinal"></div>
+			
+			
+			<div style="margin-top:2px;">
+				<div class="ib" title="新建" onclick="newReport();"><img src="report/images/new_c.jpg"/></div>
+				<div class="ib" title="打开" onclick="openReport();"><img src="report/images/dk_c.jpg"/></div>
+				<div class="ib" title="保存" onclick="saveReport();"><img src="report/images/save_c.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="打印预览"><img src="report/images/find_c.jpg"/></div>
+				<div class="ib" title="打印"><img src="report/images/print_c.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="剪切"><img src="report/images/jianqie_c.jpg"/></div>
+				<div class="ib" title="复制"><img src="report/images/copy_c.jpg"/></div>
+				<div class="ib" title="粘贴"><img src="report/images/zhantie_c.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="录入关键字"><img src="report/images/key_h.jpg" id="key_icon"/></div>
+				<div class="ib" title="表页排序"><img src="report/images/bypx_h.jpg" id="bypx_icon"/></div>
+				<div class="ib" title="可变区排序"><img src="report/images/kbzpx_h.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="向右求和" onclick="toRightSum();"><img src="report/images/xyqh_c.jpg"/></div>
+				<div class="ib" title="向下求和" onclick="toFootSum();"><img src="report/images/xxqh_c.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="常用批命令"><img src="report/images/cypml_c.jpg" style="margin-top:5px;"/></div>
+				<div class="ib" title="命令窗"><img src="report/images/mlc_c.jpg"/></div>
+				<div class="ib" title="提示信息日志"><img src="report/images/log_c.jpg"/></div>
+				<div class="sort_longitudinal"></div>
+				<div class="ib" title="帮助"><img src="report/images/help_c.jpg"/></div>
+			</div>
+			
+			<div class="thin_longitudinal"></div>
+			
+		</div>
+		</div>
+		<!-- 工具栏 E -->
+		
+		
+		<!-- sheet区域 S -->
+		<div id="sheet_container" style="height:318px;">
+			
+			
+
+		
+		</div>
+		<!-- sheet区域 E -->
+
+
+		<!-- 右键菜单 S -->
+	    <ul id="cell_contextmenu" class="contextmenu" style="width:140px;display:none;top:0px;left:0px;">
+	    	
+	    	<!-- 
+	    	<li><span>定位(A)...</span></li>
+	    	<li><span>查找(B)...</span></li>
+	    	<li><span>替换(R)...</span></li>
+	    	<li>
+	    		<span>区域填充(E) &raquo;</span>
+	    		<ul>
+	    			<li><span>向下(D)</span></li>
+	    			<li><span>向右(R)</span></li>
+	    			<li><span>向上(U)</span></li>
+	    			<li><span>向左(L)</span></li>
+	    		</ul>
+	    	</li>
+	    	 -->
+	    	
+	    	
+	    	<li onclick="clearCell();"><span>清除(D)</span></li>
+	    	<hr>
+	    	
+	    	<li style="color:#aaa;"><span>行高(F)...</span></li>
+	    	<li style="color:#aaa;"><span>列宽(G)...</span></li>
+	    	<li onclick="setCellProperties();"><span>单元属性(H)...</span></li>
+	    	<li onclick="merge_cell();"><span>组合单元(J)...</span></li>
+	    	<li onclick="split_cell();"><span>拆分单元(S)...</span></li>
+	    	<li style="color:#aaa;"><span>格式套用(K)...</span></li>
+	    	<hr>
+	    	
+	    	<li style="color:#aaa;"><span>插入图表对象(L)...</span></li>
+	    	<li style="color:#aaa;">
+	    		<span>排序(M)... &raquo;</span>
+	    		<ul>
+	    			<li style="color:#aaa;"><span>表页(G)</span></li>
+	    			<li style="color:#aaa;"><span>可变区(V)</span></li>
+	    		</ul>
+	    	</li>
+	    	<!-- <li><span>命令窗(N)...</span></li> -->
+	    	<li onclick="defineFormula()"><span>套用公式模板(Q)...</span></li>
+	    
+	    </ul>
+		<!-- 右键菜单 E -->
+		
+
+		
+		<!-- 底部控制栏 S -->
+		<div style="height:16px;width:976px;border-left:2px inset #ccc;float:left;cursor:default;">
+			<div style="float:left;color:red;text-align:center;width:40px;" onclick="formatDataChange()">
+				<div style="position:absolute;"><input type="button" style="height:16px;width:40px;"/></div>
+				<div id="fdcb" style="position:absolute;width:40px;height:16px;text-align:center;padding-top:1px;">格式</div>
+			</div>
+			
+			<div id="page_control" style="width:180px;height:16px;float:left;margin-left:40px;display:none;">
+				<div style="float:left;width:64px;">
+					<input type="button" class="controlbar" style="background:url('report/images/btn_first.bmp');background-repeat:no-repeat;"/>
+					<input type="button" class="controlbar" style="background:url('report/images/btn_prve.bmp');background-repeat:no-repeat;"/>
+					<input type="button" class="controlbar" style="background:url('report/images/btn_next.bmp');background-repeat:no-repeat;"/>
+					<input type="button" class="controlbar" style="background:url('report/images/btn_last.bmp');background-repeat:no-repeat;"/>
+				</div>
+				<div style="float:left;height:14px;width:114px;border:1px solid #000;">
+					<div style="float:left;width:50px;height:16px;position:absolute;line-height:16px;background-color:#fff;margin-top:-3px;margin-left:4px;text-align:center;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #fff;">第1页</div>
+					<div style="float:left;width:50px;position:absolute;margin-left:58px;text-align:center;margin-top:1px;">第2页</div>
+				</div>
+				
+			</div>
+			
+			<div id="xsc" style="float:left;width:936px;height:16px;margin-left:40px;">
+				<div style="float:left;width:7px;height:16px;">
+					<input type="button" value="" style="width:7px;height:16px;padding:0;"/>
+				</div>
+				<div id="xscroll" style="width:922px;overflow-x:scroll;overflow-y:hidden;float:left;height:16px;" onscroll="scrolly(this)">
+					<div id="scrollbar_scroll_width_bar" style="width:2000px;">scroll</div>
+				</div>
+				<div style="float:left;width:7px;height:16px;">
+					<input type="button" value="" style="width:7px;height:16px;padding:0;"/>
+				</div>
+			</div>
+		</div>
+		<!-- 底部控制栏 E -->
+
+
+
+
+	</div>
+	<!-- 最外层容器 E -->
+
+
+
+</body>
+
+
+</html>

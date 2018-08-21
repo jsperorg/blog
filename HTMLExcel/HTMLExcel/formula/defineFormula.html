@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>定义公式</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunctionForCell.js"></script>
+<script type="text/javascript">
+
+var cell = window.parent.valueMap.get("HTMLExcel_formula_defineFormula");
+
+$(document).ready(function(){
+	$("#cellName").val(cell.getAttribute("name"));
+	$("#formula_id").val(cell.getAttribute("value"));
+});
+
+//确定
+function ok(){
+	
+	window.parent.deliverValue("HTMLExcel_formula_defineFormula",$("#formula_id").val());
+	window.parent.closeWindow("HTMLExcel_formula_defineFormula");
+	
+}
+
+//取消
+function cancel(){
+	window.parent.closeWindow("HTMLExcel_formula_defineFormula");
+}
+
+
+//函数向导
+function funcxd(){
+	window.parent.openWindow("HTMLExcel_formula_functionWizard","HTMLExcel_formula_defineFormula");
+}
+
+
+
+//弹窗回调方法
+function deliverValue(param){
+	//函数字符串累加
+	var val=$("#formula_id").val();
+	$("#formula_id").val(val+param);
+}
+
+
+
+</script>
+	<style type="text/css">
+		.buttonbar{width: 356px; height: 25px; text-align: center;}
+		.buttonbar input{margin-left:15px;}
+	</style>
+</head>
+<body>
+	<div class="container"
+		style="float: left; width: 468px; height: 96px; background-color: #D4D0C8; position: absolute; top: 0px; left: 0px;">
+		<div
+			style="width: 445px; height: 70px; margin-top: 18px; margin-left: 14px;">
+
+			<div style="width: 356px; height: 100%; float: left;">
+
+
+				<div style="width: 356px; height: 42px;">
+
+					<input type="text" style="width: 66px;background-color:#D4D0C8;color:#808080;" readonly="readonly" id="cellName"/> = <input
+						id="formula_id" type="text" style="width: 260px;" />
+
+				</div>
+
+
+				<div class="buttonbar">
+
+
+					<input id="xd_id" type="button" value="函数向导..." onclick="funcxd()" />
+					<input type="button" value="筛选条件..."onclick="" />
+					<input type="button"value="关联条件..." onclick="" />
+
+
+				</div>
+
+
+
+			</div>
+
+			<div
+				style="width: 88px; height: 100%; text-align: center; float: left;">
+				<input type="button" value="确认" onclick="ok()" /><br>
+				<br> <input type="button" value="取消" onclick="cancel()" />
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

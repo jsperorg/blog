@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>打开</title>
+<style>
+ table{border-collapse:collapse;
+}
+td{
+    empty-cells:show;
+}
+</style>
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunctionForCell.js"></script>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<style type="text/css"> 
+.li_1 {list-style:none;width:280px;height:18px;line-height:16px;background-image:url('images/icon/folder.gif');background-repeat:no-repeat;background-position:2px 3px;padding-left:20px;padding-top:1px;padding-right:0px;cursor:default;font-family:宋体;};
+.templatebox {}
+.templatebox li {list-style:none;width:78px;height:78px;text-align:center;float:left;}
+.templatebox li img {margin:5px;}
+.templatebox li label {padding:0;}
+</style>
+ <script type="text/javascript">
+ 
+ 
+    $(document).ready(function(){
+    	loadData();
+    });
+    
+    
+    function openIt(){
+    	if(currentSelectedTemplate==null){
+    		jAlert("请选择文件。");
+    		return;
+    	}
+    	
+    	window.parent.deliverValue("HTMLExcel_openReport",currentSelectedTemplate.getAttribute("name"));
+    	
+    	window.parent.closeWindow("HTMLExcel_openReport");
+    }
+    
+    
+    
+    function loadData(){
+/* 
+    	 var rdm=Math.random(634564);
+    	 
+    	$("#list1").html("");
+    	$.ajax({
+     	   url:'reportManageAction!findReportByAccid',
+     	   data:{"rdm":rdm},
+     	   dataType:'json',
+     	   success:function(data,status){
+     		   if(status='sucess'){
+     			  
+     			   $.each(data.rmList,function(key,value){
+         			   if(value.flag=="0"){
+         				   flag_="预制";     
+         			   }else{
+         				   flag_="自定义"; 
+         			   }
+ 					var str = "<li id='"+value.fileNameOut+"' name='"+value.fileNameOut+"' ondblclick=dbopenIt('"+value.fileNameOut+"','"+ReportJs.Util.trimAll(value.fileName)+"') onclick='selectIt(this,\""+value.fileNameOut+"\",\""+ReportJs.Util.trimAll(value.fileName)+"\")' ><img src='images/icon/mrpage.gif'><br><label>"+ReportJs.Util.trimAll(value.fileName)+"</label><br><a href=# onClick='javaScript:deleteById(\""+value.fileNameOut+"\","+value.id+");event.cancelBubble=true;' >删除</a></li>";
+         			 $("#list1").append(str); 
+         			   
+         		   });
+     		   }else{
+     			   jAlert("获取失败！");
+     		   }
+     	   }
+     	 });
+    	 */
+    	
+    	
+    	
+    	var dl = new Array();
+
+    	var o1 = {
+    		name:'资产负债表',
+    		id:'01'
+    	}
+
+    	var o2 = {
+    		name:'利润表',
+    		id:'02'
+    	}
+
+    	var o3 = {
+    		name:'现金流量表',
+    		id:'03'
+    	}
+
+    	var o4 = {
+    		name:'自定义报表1',
+    		id:'04'
+    	}
+
+    	var o5 = {
+    		name:'自定义报表2',
+    		id:'05'
+    	}
+    	
+    	dl.push(o1);
+    	dl.push(o2);
+    	dl.push(o3);
+    	dl.push(o4);
+    	dl.push(o5);
+    	
+    	$.each(dl,function(key,obj){
+			   
+			var str = "<li id='"+obj.id+"' name='"+obj.name+"' ondblclick='openIt()' onmousedown='templateSelect(this)' ><img src='images/icon/mrpage.gif'><br><label>"+obj.name+"</label><br><a href=# onClick='javaScript:deleteById('"+obj.id+"');event.cancelBubble=true;' >删除</a></li>";
+			 $("#list1").append(str); 
+			   
+		   });
+    	
+    	
+    	
+    }
+
+    function deleteById(liId,id){
+    	var res = confirm('确定要删除吗?');
+        if(res){
+        	$.get("reportManageAction!deleteReportByID", { 'reportManage.id': id },
+      			  function(data){
+  		   			    if (data.status=1) {
+  		   			        //$("#"+liId).remove();
+  		   			 		 loadData();
+  		   			    }else{
+  		   			    	jAlert("删除失败!");
+  		   			    }
+      			  });
+         }
+    		
+    	
+    }
+    
+    
+    
+    var currentSelectedTemplate = null;
+  //模板选择函数
+  function templateSelect(tem){
+  	
+  	if(currentSelectedTemplate!=null && currentSelectedTemplate != tem){
+  		var img = currentSelectedTemplate.getElementsByTagName("img")[0];
+  		img.src="images/icon/mrpage.gif";
+  		var label = currentSelectedTemplate.getElementsByTagName("label")[0];
+  		label.style.backgroundColor = "#fff";
+  		label.style.color = "#000";
+  	}
+  	
+  	var img = tem.getElementsByTagName("img")[0];
+  	img.src="images/icon/mrpage_selected.gif";
+  	var label = tem.getElementsByTagName("label")[0];
+  	label.style.backgroundColor = "#0a246a";
+  	label.style.color = "#fff";
+  	currentSelectedTemplate = tem;
+  	
+  }
+    
+    
+ </script>
+</head>
+<body>
+<center>
+<div>
+				
+	<div id="list1" class="templatebox" style="width:350px;height:160px;border:2px inset #ccc;margin-top:4px;margin-left:7px;background-color:#fff;padding:0px;margin:0px;list-style:none;overflow:auto;">
+			
+	</div>
+				
+	<input  type="button" onclick="openIt();" value="打开"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="window.parent.closeWindow('HTMLExcel_openReport');" value="取消"/>
+</div>
+</center>
+
+
+</body>
+</html>

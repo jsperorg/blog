@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>常规函数编辑</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunctionForCell.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+
+		$("#funName").attr("readonly", "readonly");
+		$("#funFormat").attr("readonly", "readonly");
+		$("#funRemark").attr("readonly", "readonly");
+		var funcname = window.parent.valueMap.get("HTMLExcel_formula_fun1Edit");
+		
+		$("#funName").attr("value", funcname);
+		setOther(funcname);
+	});
+	//设置 格式和说明
+	function setOther(funcname) {
+		if(funcname==null)return;//如果不选择
+		funcname = funcname.toUpperCase();
+		var format = "";
+		var remark = "";
+		if (funcname == "QC") {
+			format = "QC(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的期初余额;\r\n举例：QC("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+		if (funcname == "SQC") {
+			format = "参数含义：sQC(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的数量期初余额;\r\n举例：sQC("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+		if (funcname == "WQC") {
+			format = "wQC(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的外币期初余额;\r\n举例：wQC("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+
+		if (funcname == "QM") {
+			format = "QM(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的期末余额;\r\n举例：QM("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+		if (funcname == "SQM") {
+			format = "sQC(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的数量期末余额;\r\n举例：sQC("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+		if (funcname == "WQM") {
+			format = "wQC(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的外币期末余额;\r\n举例：wQC("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+		if (funcname == "FS") {
+			format = "FS(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的发生额\r\n举例：FS("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+		if (funcname == "SFS") {
+			format = "sFS(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的数量发生额;\r\n举例：sFS("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+		if (funcname == "WFS") {
+			format = "wFS(〈科目编码〉,[〈会计期间〉],[〈方向〉],[〈账套号〉],[〈会计年度〉],[〈编码1〉],[〈编码2〉],[〈截止日期〉],[〈是否包含未记账〉],[〈编码1汇总〉],[〈编码2汇总〉])";
+			remark = '函数用途：返回某一会计科目某会计期间的外币发生额;\r\n举例：wFS("1001", "1","借","001","2013","001","002","2013-1-31","是","否","否")';
+
+			$("#funFormat").attr("value", format);
+			$("#funRemark").attr("value", remark);
+		}
+	}
+	//确定
+	function ok() {
+
+		var param = $("#funInput").attr("value");
+		window.parent.getWindow("HTMLExcel_formula_defineFormula").deliverValue(param);
+		closeWindow();
+		window.parent.closeWindow("HTMLExcel_formula_functionWizard");
+		
+	}
+	//上一步
+	function prev() {
+		closeWindow();
+	}
+	//取消
+	function closeWindow() {
+		window.parent.closeWindow("HTMLExcel_formula_fun1Edit");
+	}
+	//打开参照
+	function openRefer() {
+		
+		var funName = $("#funName").val();
+		window.parent.openWindow("HTMLExcel_formula_fw2","HTMLExcel_formula_fun1Edit",funName);
+	}
+
+
+	//弹窗回调方法
+	function deliverValue(param){
+		
+		$("#funInput").attr("value",$("#funInput").val()+ param);
+	}
+
+</script>
+</head>
+<body>
+	<div class="container"
+		style="float: left; width: 440px; height: 325px; background-color: #D4D0C8; position: absolute; top: 0px; left: 0px;">
+
+
+
+
+		<fieldset style="width: 390px; height: 276px; margin-left: 12px;">
+			<legend style="margin-left: 150px;">业务函数</legend>
+			<div>
+				<table style="width: 390px;">
+					<tr>
+						<td valign="top">函数名称:</td>
+						<td><input type="text" id="funName" style="width: 320px"
+							disabled="true" /></td>
+					</tr>
+					<tr>
+						<td valign="top">函数格式:</td>
+						<td><textarea id="funFormat"
+								style="width: 320px; height: 96px;" disabled="true"></textarea></td>
+					</tr>
+					<tr>
+						<td valign="top">函数说明:</td>
+						<td><textarea id="funRemark"
+								style="width: 320px; height: 96px;" disabled="true"></textarea></td>
+					</tr>
+					<tr>
+						<td valign="top">函数录入:</td>
+						<td><input type="text" id="funInput" style="width: 320px" /></td>
+					</tr>
+				</table>
+			</div>
+		</fieldset>
+
+		<div
+			style="width: 100%; height: 30px; margin-top: 5px; text-align: center;">
+
+			<input type="button" value="上一步" onclick="prev()"
+				style="margin-left: 28px;" /> <input type="button" value="参照"
+				onclick="openRefer()" style="margin-left: 28px;" /> <input
+				type="button" value="确定" onclick="ok()" style="margin-left: 28px;" />
+			<input type="button" value="取消"
+				style="margin-left: 28px;" onclick="closeWindow();" />
+		</div>
+
+
+
+	</div>
+</body>
+<script type="text/javascript">
+	document.getElementById("funInput").focus();
+</script>
+</html>

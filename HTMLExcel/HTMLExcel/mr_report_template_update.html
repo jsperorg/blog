@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>模板维护</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunction.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	openWindow("HTMLExcel");
+});
+
+</script>
+</head>
+<body style="background-color:#ffffff;">
+
+
+<div>
+
+
+
+	
+	<!-- HTML报表相关窗体 开始 -->
+
+		<!-- 报表界面 -->
+		<div id="HTMLExcel"
+			style="margin-left: 10px;margin-top: 10px; padding: auto; display: none;" closeable="false"
+			type="window" width="1000" height="435" title="财务报表 - [report1]" drawable="false"
+			src="report.html?reportTemplateUpdate=true" icon="report/images/report.jpg"></div>
+
+		<!-- 新建报表 -->
+		<div id="HTMLExcel_newReport"
+			style="margin-left: 140px;margin-top: 60px; padding: auto; display: none;"
+			type="window" width="620" height="405" title="新建报表"
+			src="newReport.html"></div>
+
+		<!-- 打开报表 -->
+		<div id="HTMLExcel_openReport"
+			style="margin-left: 160px;margin-top: 60px; padding: auto; display: none;"
+			type="window" width="440" height="279" title="打开报表"
+			src="openReport.html"></div>
+
+
+
+		<!-- 打开报表模板 -->
+		<div id="HTMLExcel_openReportTemplate"
+			style="margin-left: 160px;margin-top: 60px; padding: auto; display: none;"
+			type="window" width="440" height="279" title="打开报表模板"
+			src="openReportTemplate.html"></div>
+
+
+		<!-- 报表另存为 -->
+		<div id="HTMLExcel_saveAsReport"
+			style="margin-left: 160px;margin-top: 60px; padding: auto; display: none;"
+			type="window" width="440" height="279" title="保存报表"
+			src="saveAsReport.html"></div>
+
+		<!-- 报表另存为模板 -->
+		<div id="HTMLExcel_saveAsReportTemplate"
+			style="margin-left: 160px;margin-top: 60px; padding: auto; display: none;"
+			type="window" width="440" height="279" title="另存为模板"
+			src="saveAsReportTemplate.html"></div>
+
+
+
+		<!-- 报表尺寸设置 -->
+		<div id="HTMLExcel_setReportSize"
+			style="margin-left: 200px;margin-top: 90px; padding: auto; display: none;"
+			type="window" width="278" height="125" title="表尺寸"
+			src="setReportSize.html"></div>
+
+		<!-- 设置关键字 -->
+		<div id="HTMLExcel_setKeyword"
+			style="margin-left: 200px;margin-top: 90px; padding: auto; display: none;"
+			type="window" width="300" height="205" title="设置关键字"
+			src="setKeyword.html"></div>
+
+
+		<!-- 录入关键字 -->
+		<div id="HTMLExcel_enteringKeyword"
+			style="margin-left: 200px;margin-top: 90px; padding: auto; display: none;"
+			type="window" width="396" height="175" title="录入关键字"
+			src="enteringKeyword.html"></div>
+
+
+		<!-- 公式定义 -->
+		<div id="HTMLExcel_formula_defineFormula"
+			style="margin-left: 200px;margin-top: 120px; padding: auto; display: none;"
+			type="window" width="468" height="130" title="定义公式"
+			src="formula/defineFormula.html"></div>
+
+
+
+		<!-- 函数向导 -->
+		<div id="HTMLExcel_formula_functionWizard"
+			style="margin-left: 200px;margin-top: 90px; padding: auto; display: none;"
+			type="window" width="470" height="317" title="函数向导"
+			src="formula/functionWizard.html"></div>
+
+		<!-- 财务函数 -->
+		<div id="HTMLExcel_formula_fun1Edit"
+			style="margin-left: 200px;margin-top: 40px; padding: auto; display: none;"
+			type="window" width="440" height="380" title="财务函数"
+			src="formula/fun1Edit.html"></div>
+
+		<!-- 函数参照 -->
+		<div id="HTMLExcel_formula_fw2"
+			style="margin-left: 200px;margin-top: 60px; padding: auto; display: none;"
+			type="window" width="320" height="415" title="财务函数"
+			src="formula/fw2.html"></div>
+
+		<!-- 取消关键字 -->
+		<div id="HTMLExcel_cancelKeyword"
+			style="margin-left: 200px;margin-top: 60px; padding: auto; display: none;"
+			type="window" width="276" height="155" title="取消关键字"
+			src="cancelKeyword.html"></div>
+
+
+		<!-- 单元格属性 setCellProperties.html-->
+		<div id="HTMLExcel_setCellProperties"
+			style="margin-left: 70px;margin-top: 50px; padding: auto; display: none;"
+			type="window" width="394" height="286" title="单元格属性"
+			src="setCellProperties.html"></div>
+
+	<!-- HTML报表相关窗体 结束 -->
+
+
+	<!-- 进度显示 窗体 theProgressWindow.html  chenjye 2014-9-23 -->
+	<div id="theProgressWindow"
+		style="margin-left: 200px; margin-top: 190px; padding: auto; display: none;"
+		type="window" width="260" height="90" title="处理中..." closeable="false"
+		src="../../portal/theProgressWindow.html"></div>
+
+
+
+
+
+	<!-- 部门档案 窗体 -->
+	<div id="basic_comref_dptref"
+		 style="margin-left: 20px;margin-top: 50px; padding: auto; display: none;"
+		 type="window" width="752" height="370" title="部门档案"
+		 src="../../jsp/basic/comref/dptref.html"></div>
+
+
+	<!-- 客户档案 窗体 -->
+	<div id="basic_comref_cusref"
+		 style="margin-left: 20px;margin-top: 50px; padding: auto; display: none;"
+		 type="window" width="752" height="370" title="客户档案"
+		 src="../../jsp/basic/comref/cusref.html"></div>
+
+
+
+	<!-- 人员档案 窗体 -->
+	<div id="basic_comref_personref"
+		 style="margin-left: 20px;margin-top: 50px; padding: auto; display: none;"
+		 type="window" width="752" height="370" title="人员档案"
+		 src="../../jsp/basic/comref/personref.html"></div>
+
+
+
+	<!-- 供应商档案 窗体 -->
+	<div id="basic_comref_supref"
+		 style="margin-left: 20px;margin-top: 50px; padding: auto; display: none;"
+		 type="window" width="752" height="370" title="供应商档案"
+		 src="../../jsp/basic/comref/supref.html"></div>
+
+
+
+	<!-- 项目参照 窗体 -->
+	<div id="basic_comref_fitemref"
+		 style="margin-left: 20px;margin-top: 50px; padding: auto; display: none;"
+		 type="window" width="752" height="370" title="项目参照"
+		 src="../../jsp/basic/comref/fitemref.html"></div>
+
+
+	<!-- 凭证页面.科目参照 subjectsreference.html -->
+	<div id="dsign_subjectsreference"
+		 style="margin-left: 70px;margin-top: 50px; padding: auto; display: none;"
+		 type="window" width="450" height="340" title="科目参照"
+		 src="../../jsp/dsign/subjectsreference.html"></div>
+
+
+
+
+</div>
+
+
+
+<script type="text/javascript" src="/exam_t/js/winui/plugin/winui.window.js"></script>
+
+
+</body>
+</html>

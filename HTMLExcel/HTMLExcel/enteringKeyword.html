@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>录入关键字</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunction.js"></script>
+<style type="text/css">
+.button{width:80px;}
+</style>
+
+<script type="text/javascript">
+
+var keyword_cell_map = window.parent.valueMap.get("HTMLExcel_enteringKeyword");
+
+$(function(){
+	
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	var quarter = Math.ceil(month/3);
+	
+	$("#year").val(year);
+	$("#month").val(month);
+	$("#day").val(day);
+	$("#quarter").val(quarter);
+	
+	var inputs = document.getElementsByTagName("input");
+	for(var i=0;i<inputs.length;i++){
+		if(inputs[i].type=="text"){
+			$(inputs[i]).attr("disabled","disabled");
+			$(inputs[i]).css("background-color","#D4D0C8");
+		}
+	}
+
+	var keySet = keyword_cell_map.keySet();
+	for(var k in keySet){
+		$("#"+k).attr("disabled",false);
+		$("#"+k).css("background-color","");
+		var v = keyword_cell_map.get(k).getAttribute("value");
+		if(v!=null && v!=""){
+			$("#"+k).val(v);
+		}
+	}
+
+
+	
+});
+
+
+//确定按钮
+function btnConfirm(){
+
+	
+	var keySet = keyword_cell_map.keySet();
+	for(var k in keySet){
+		var v = $("#"+k).val();
+		keyword_cell_map.get(k).setAttribute("value",v);
+	}
+
+	window.parent.deliverValue("HTMLExcel_enteringKeyword",keyword_cell_map);
+	window.parent.closeWindow("HTMLExcel_enteringKeyword");
+}
+
+</script>
+
+</head>
+<body>
+	<div class="container" style="float:left;width:396px;height:150px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:370px;height:130px;margin-top:12px;margin-left:14px;">
+			
+			
+			
+			<table style="border-collapse:collapse;">
+				<tr>
+					<td>单位名称:</td>
+					<td colspan="3"><input type="text" style="width:206px;" id="unitName"/></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>单位编号:</td>
+					<td colspan="3"><input type="text" style="width:206px;" id="unitNumber"/></td>
+					<td width="100" align="center"><input type="button" value="确定" onclick="btnConfirm()" class="button"/></td>
+				</tr>
+				<tr>
+					<td align="right">年:</td>
+					<td><input type="text" style="width:84px;" id="year"/></td>
+					<td width="30" align="right">月:</td>
+					<td><input type="text" style="width:84px;" id="month"/></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td align="right">季:</td>
+					<td><input type="text" style="width:84px;" id="quarter"/></td>
+					<td align="right">日:</td>
+					<td><input type="text" style="width:84px;" id="day"/></td>
+					<td align="center"><input type="button" value="取消" onclick="window.parent.closeWindow('HTMLExcel_enteringKeyword')" class="button"/></td>
+				</tr>
+				<tr>
+					<td align="right">自定义:</td>
+					<td><input type="text" style="width:84px;" value="1"/></td>
+					<td></td>
+				</tr>
+			</table>
+			
+			
+		
+		
+		</div>
+	</div>
+</body>
+</html>

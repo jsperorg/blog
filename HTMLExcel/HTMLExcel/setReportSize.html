@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>表尺寸</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunction.js"></script>
+<style type="text/css">
+.button {width:74px;}
+</style>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		var param = window.parent.valueMap.get("HTMLExcel_setReportSize");
+
+		document.getElementById("rowCount").value=param.rowCount;
+		document.getElementById("cellCount").value=param.cellCount;
+		
+	});
+
+	//递计算框递增函数
+	function increasing(btn){
+		var input = btn.parentNode.parentNode.parentNode.getElementsByTagName('input')[0];
+		input.value = parseInt(input.value)+1;
+	}
+	
+	//递计算框递减函数
+	function decline(btn){
+		var input = btn.parentNode.parentNode.parentNode.getElementsByTagName('input')[0];
+		input.value = parseInt(input.value)-1;
+	}
+	
+	//确定按钮
+	function btnConfirm(){
+
+		var rc = document.getElementById("rowCount").value;
+		var cc = document.getElementById("cellCount").value;
+
+		var param = {"rowCount":rc,"cellCount":cc};
+		window.parent.deliverValue("HTMLExcel_setReportSize",param);
+		window.parent.closeWindow("HTMLExcel_setReportSize");
+		
+		
+	}
+
+</script>
+
+</head>
+<body>
+	<div class="container" style="float:left;width:278px;height:100px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:250px;height:60px;margin-top:20px;margin-left:20px;">
+			
+			<table>
+				<tr>
+					<td width="40">行数:</td>
+					<td width="120">
+											
+											
+						<div class="gradually">
+							<div style="float:left;"><input id="rowCount" class="textbox" type="text" value="20" style="width:70px;"/></div>
+							<div style="float:left;">
+								<div><input type="button" onfocus="this.blur();" class="incbtn1" onclick="increasing(this);" style="background-image:url('images/icon/up1.gif');"/></div>
+								<div><input type="button" onfocus="this.blur();" class="incbtn2" onclick="decline(this);" style="background-image:url('images/icon/down1.gif');"/></div>
+							</div>
+						</div>
+											
+					
+					</td>
+					<td><input type="button" value="确定" onclick="btnConfirm()" class="button"/></td>
+				</tr>
+				<tr>
+					<td>列数:</td>
+					<td>
+											
+											
+						<div class="gradually">
+							<div style="float:left;"><input id="cellCount" class="textbox" type="text" value="7" style="width:70px;"/></div>
+							<div style="float:left;">
+								<div><input type="button" onfocus="this.blur();" class="incbtn1" onclick="increasing(this);" style="background-image:url('images/icon/up1.gif');"/></div>
+								<div><input type="button" onfocus="this.blur();" class="incbtn2" onclick="decline(this);" style="background-image:url('images/icon/down1.gif');"/></div>
+							</div>
+						</div>
+											
+					
+					</td>
+					<td><input type="button" value="取消" onclick="window.parent.closeWindow('HTMLExcel_setReportSize')" class="button"/></td>
+				</tr>
+			</table>
+			
+			
+			
+		
+		
+		</div>
+	</div>
+</body>
+</html>

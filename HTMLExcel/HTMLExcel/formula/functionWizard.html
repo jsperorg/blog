@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>函数向导</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunctionForCell.js"></script>
+<script type="text/javascript">
+
+
+//上一步
+function prev(){
+	closeWindow();
+}
+
+//下一步
+function next(){
+	///加上函数控制
+    if($("#func_id").val()==null||$("#func_id").val()==""){
+    	jAlert("请选择函数!");
+    	return;
+    }
+	var funName = $("#func_id").val();
+	window.parent.openWindow("HTMLExcel_formula_fun1Edit","HTMLExcel_formula_functionWizard",funName);
+	
+}
+
+//取消
+function closeWindow(){
+	window.parent.closeWindow("HTMLExcel_formula_functionWizard");
+}
+
+
+</script>
+
+</head>
+<body>
+	<div class="container" style="float:left;width:470px;height:292px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:444px;height:280px;margin-top:16px;margin-left:10px;">
+			
+			
+			<div style="width:100%;height:20px;">
+				请选择需要的函数，然后按"下一步"按钮的输入参数.
+			</div>
+		
+			<div style="width:100%;height:px;">
+				
+				
+				<div style="width:165px;height:228px;float:left;">
+					
+					<div>函数分类(C):</div>
+					<select id="funcfl_id" size="15" style="width:165px;height:208px;">
+						<option value="账务函数">账务函数</option>
+					</select>
+					
+				</div>
+				
+				<div style="width:165px;height:228px;float:left;margin-left:14px;">
+					
+					<div>函数名(N):</div>
+					
+					<select id="func_id" size="15" style="width:165px;height:208px;">
+						<option value="DFS" selected='selected' >对方科目发生(DFS)</option>
+						<option value="FS">发生(FS)</option>
+						<option value="HL">汇率(HL)</option>
+						<option value="JE">净额(JE)</option>
+						<option value="LFS">累计发生(LFS)</option>
+						<option value="QC">期初(QC)</option>
+						<option value="QM">期末(QM)</option>
+						<option value="SDFS">数量对方发生(SDFS)</option>
+						<option value="SFS">数量发生(SFS)</option>
+						<option value="SJE">数量净额(SJE)</option>
+						<option value="SLFS">数量累计发生(SLFS)</option>
+						<option value="SQC">数量期初(SQC)</option>
+						<option value="SQM">数量期末(SQM)</option>
+						<option value="STFS">数量条件发生(STFS)</option>
+						<option value="TFS">条件发生(TFS)</option>
+						<option value="WDFS">外币对方发生(WDFS)</option>
+						<option value="WFS">外币发生(WFS)</option>
+						<option value="WJE">外币净额(WJE)</option>
+						<option value="WLFS">外币累计发生(WLFS)</option>
+						<option value="WQC">外币期初(WQC)</option>
+						<option value="WQM">外币期末(WQM)</option>
+						<option value="WTFS">外币条件发生(WTFS)</option>
+						<option value="XJLL">现金流量(XJLL)</option>
+					</select>
+					
+					
+				</div>
+				
+				<div style="width:92px;height:228px;float:left;text-align:center;">
+					
+					<br>
+					<input type="button" value="上一步" onclick="prev()"/><br><br>
+					
+					<input type="button" value="下一步" onclick="next()"/><br><br>
+					
+					<input type="button" value=" 取消 " onclick="closeWindow();"/><br><br>
+					
+				</div>
+				
+			</div>
+		
+			<div style="height:20px;">
+				财务函数
+			</div>
+		
+		
+		
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	document.getElementById("funcfl_id").focus();
+</script>
+</html>

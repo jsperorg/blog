@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>打开报表</title>
+<link rel="stylesheet" type="text/css" href="/exam_t/css/public.css">
+<script type="text/javascript" src="/exam_t/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/exam_t/js/publicFunction.js"></script>
+<style type="text/css">
+*{font-family:宋体;}
+#fileList{width:416px;height:120px;border:2px inset #cccccc;overflow:auto;background-color:#ffffff;padding:0px;margin:0px;list-style:none;}
+#fileList li{width:146px;height:17px;line-height:17px;float:left;}
+#fileList img{vertical-align:middle;float:left;}
+#fileList div{margin-left:2px;float:left;}
+
+.button{width:80px;}
+</style>
+<script type="text/javascript">
+
+
+var currentSelectedTemplate = null;
+//模板选择函数
+function templateSelect(tem){
+	
+	if(currentSelectedTemplate!=null && currentSelectedTemplate != tem){
+		var img = currentSelectedTemplate.getElementsByTagName("img")[0];
+		img.src="images/rfsicon.bmp";
+		var label = currentSelectedTemplate.getElementsByTagName("label")[0];
+		label.style.backgroundColor = "";
+		label.style.color = "";
+		
+	}
+	
+	var img = tem.getElementsByTagName("img")[0];
+	img.src="images/rfsdicon.bmp";
+	var label = tem.getElementsByTagName("label")[0];
+	label.style.backgroundColor = "#0a246a";
+	label.style.color = "#ffffff";
+	currentSelectedTemplate = tem;
+	
+}
+
+//以选中的文件名称保存（文件覆盖）
+function setFileName(){
+
+	var fileName = currentSelectedTemplate.getElementsByTagName("label")[0].innerHTML;
+	$("#fileName").val(fileName);
+	
+	
+}
+
+var dl = null;
+function showReportTemplates(classId){
+	
+
+	$.ajax({
+	    url: "mrReportTemplateAction!findReportTemplateByClassId?classId="+classId,
+	    //url: "mrReportTemplateAction!findAllReportTemplate",
+	    type: "post",
+	    //data: param,
+	    dataType: "json",
+	    async:false,
+	    success: function(mrReportList){
+	    	//console.info(mrReportList);
+	    	
+	    	dl = mrReportList;
+	    	$("#fileList").html("");
+	    	$.each(dl,function(key,obj){
+	    		str = "<li id=\""+obj.guid+"\" name=\""+obj.name+"\" onmousedown=\"templateSelect(this)\" ondblclick=\"setFileName()\"><img src=\"images/rfsicon.bmp\"/><div><label>"+obj.name+".rep</label></div></li>";
+	    		$("#fileList").append(str); 
+	    	});
+	    	
+	    },
+	    error:function(msg){
+	    	jAlert("获取报表列表时发生错误！");
+	    }
+	});
+	
+	
+	
+	
+	
+	
+}
+
+var fileName="";
+
+function saveReport(){
+	
+	fileName = $("#fileName").val();
+	
+	if(fileName==""){
+		jAlert("请输入文件名！");
+		return;
+	}
+	
+
+	if(fileName.indexOf(".rep")>-1){
+		fileName = fileName.substr(0,fileName.lastIndexOf("."));
+	}
+	
+	
+	var fileExists = false;
+	if(dl!=null){
+		for(var i=0;i<dl.length;i++){
+			if(dl[i].name == fileName){
+				fileExists = true;
+				break;
+				
+			}
+		}
+	}
+	
+
+	if(fileExists==true){
+		jConfirm("["+fileName+".rep]已存在，你确定覆盖此文件吗？","提示",function(flag){
+			if(flag == true){
+				executeSave();
+			}else{
+				$("#fileName").focus();
+				$("#fileName").select();
+				return;
+			}
+			
+		});
+	}else{
+		executeSave();
+	}
+
+	
+	
+	
+	
+}
+
+
+function executeSave(){
+
+	var parentWindow = window.parent.getWindow("HTMLExcel");
+	
+	var html = window.parent.valueMap.get("HTMLExcel_saveAsReportTemplate");
+	var classId = $("#mrClassSelect").val();
+	var param={
+		"mrReportTemplate.classId":classId,
+		"mrReportTemplate.name":fileName,
+		"clobField":html
+	};
+	
+	
+	$.ajax({
+	    url: "mrReportTemplateAction!saveReportTemplate",
+	    type: "post",
+	    data: param,
+	    dataType: "json",
+	    async:false,
+	    success: function(data){
+	    	jAlert("保存成功!","提示",function(){
+    			if(parentWindow.isReportWindowClosing==true){
+	    			window.parent.justCloseWindow("HTMLExcel");
+	    			parentWindow.isReportWindowClosing = false;
+	    		}
+				//关闭本窗体
+    	    	window.parent.closeWindow("HTMLExcel_saveAsReportTemplate");
+    		});
+	    	
+	    	//修改报表全局变量report_case="queried"以及current_queried_report=
+	    	
+	    	showReportTemplates(classId);
+	    	window.parent.deliverValue("HTMLExcel_saveAsReportTemplate",{name:fileName,classId:classId});
+	    	
+	    	
+	    },
+	    error:function(msg){
+	    	jAlert("发生错误！");
+	    }
+	});
+	
+}
+
+
+$(document).ready(function(){
+	
+	//查询并初始化模板类别下拉列表
+	$.ajax({
+	    url: "mrClassAction!findAllClass",
+	    type: "post",
+	    dataType: "json",
+	    async:false,
+	    success: function(mrClassList){
+	    	//var mrClassList=data.mrClassList;
+	    	var index=0;
+	    	if(mrClassList!=null){
+	    		var select = $("#mrClassSelect")[0];
+	    		for(var i=0;i<mrClassList.length;i++){
+					var option = new Option(mrClassList[i].className,mrClassList[i].guid);
+					if(mrClassList[i].className.indexOf("2007")>0){
+						index=i;
+						option.selected=true;
+					}
+		    		select.options.add(option);
+	    		}
+	    		
+	    	}
+	    	showReportTemplates(mrClassList[index].guid);
+	    },
+	    error:function(msg){
+	    	jAlert("发生错误！");
+	    }
+	});
+	
+	
+});
+
+</script>
+
+</head>
+<body>
+	<div class="container" style="float:left;width:440px;height:254px;background-color: #D4D0C8;position:absolute;top:0px;left:0px;">
+		<div style="width:418px;height:246px;margin-top:4px;margin-left:8px;">
+			
+			
+			
+			
+			
+			
+			
+			<div style="width:416px;height:30px;">
+				请选择分类:&nbsp;&nbsp;&nbsp;<select id="mrClassSelect" style="width:210px;" onchange="showReportTemplates(this.value);">
+							</select>
+							<img src="images/iconcolumn.jpg" style="margin-left:10px;margin-top:3px;position:absolute;"/>
+			</div>
+			
+			<ul id="fileList">
+			
+			</ul>
+			
+			<div style="width:416px;">
+				<table border="0">
+					<tr>
+						<td>文件名(N):</td>
+						<td><input type="text" style="width:240px;" id="fileName"/></td>
+						<td><input type="button" class="button" value="保存" onclick="saveReport()"/></td>
+					</tr>
+					<tr>
+						<td>文件类型(T):</td>
+						<td>
+							<select style="width:240px;">
+								<option>UFO报表文件(*.rep)</option>
+							</select>
+						</td>
+						<td><input type="button" class="button" value="取消" onclick="window.parent.closeWindow('HTMLExcel_saveAsReportTemplate')"/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><input type="button" class="button" value="帮助(H)" onclick=""/></td>
+					</tr>
+				</table>
+			</div>
+			
+			
+		
+		</div>
+	</div>
+</body>
+</html>

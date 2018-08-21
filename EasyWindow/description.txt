@@ -1,0 +1,153 @@
+
+
+
+
+============ Github markdown editor code ============================================
+
+# EasyWindow
+A powerful and ease window component for web
+
+
+### 介绍(Introduction)
+
+EasyWindow是一个简单、易用的窗体组件,主要亮点在于依照大众心理实现,
+EasyWindow is a powerful and ease window component for web.
+The main bright spot lies in the realization according to the public psychology.
+
+它的用法遵循大多数人的预期,使你用起来就像哪里见过,非常得心应手。
+Its use follows what most people expect, It gives you a sense of deja vu. Very handy.
+
+
+EasyWindow基于一个透明窗体组件`jquery-AeroWindow`。
+EasyWindow base `jquery-AeroWindow`.
+
+`jquery-AeroWindow`实现了窗体的表现,包括透明效果、拖拽效果、按钮效果。
+the `jquery-AeroWindow` implements form performance, contains transparent effect, drag-and-drop effect, and button effect.
+
+EasyWindow对其进行了完善并实现了窗体之间的关系及控制,
+EasyWindow has perfected it and realized the relationship and control between windows,
+
+包括窗体容器概念、窗体之间相互弹出、传参、回调、跨级操作、窗体模式等控制。
+Contains the concept of form container, form pop - up, reference, callback, cross - level operation, form mode control.
+
+
+### 原理简述(Principle description):
+
+EasyWindow 用`div`定义窗体,用属性定义窗体的特征,用`url`属性定义窗体的页面地址。
+EasyWindow use `DIV` to define window, use custom attribute to define characteristics,
+and use `URL` attribute to define the window access address.
+
+EasyWindow会动态创建`iframe`,并将`iframe`指向`url`属性表达的地址。
+EasyWindow will create `iframe`, and make it to show `URL` address page.
+
+
+EasyWindow组件由相关图片、css和js文件组成,
+The EasyWindow component consists of related images, CSS, and js files.
+
+其中`jquery-AeroWindow.js`是窗体渲染代码,
+`jquery-aerowindow.js` is the code for rendering window.
+
+`windowConnectionControl.js`是窗体关系控制代码。
+`windowConnectionControl.js` is the code for control window.
+
+
+### EasyWindow组件依赖(Depends)
+
+> * jquery-1.9.1.min.js
+> * jquery.easing.1.3.js
+> * jquery-ui-1.12.1.custom.min.js
+
+### 怎样使用(How to use):
+1. 将EasyWindow目录放进你的项目.
+Put the EasyWindow directory into your project.
+
+2. EasyWindow 需要一个窗体容器页,通常就是应用入口页面,这个页面用来定义一堆窗体。首先需要在页面引入依赖资源.
+EasyWindow requires a window container page,typically an application entry page that defines a set of windows. You first need to include dependent resources on the page.
+```html
+<link href="EasyWindow/AeroWindow.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.12.1.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="EasyWindow/jquery-AeroWindow.js"></script>
+<script type="text/javascript" src="EasyWindow/windowConnectionControl.js"></script>
+```
+
+3. 页面声明该页面是窗体容器页.
+The page states that the page is a window container page.
+```html
+<script type="text/javascript">
+    window.isWindowContainer=true;
+</script>
+```
+
+4. 在body里定义窗体代码,如下.
+Define the window code in the body like follows.
+```html
+<div id="Window1" style="display: none;" title="Window1" url="pages/page1.html" width="800" height="600" modal="false"></div>
+<div id="Window2" style="display: none;" title="Window2" url="pages/page2.html" width="800" height="400" maximize="false" minimize="false"></div>
+<div id="Window3" style="display: none;" title="Window3" url="pages/page3.html" width="800" height="400" maximize="false" minimize="false"></div>
+<div id="Window4" style="display: none;" title="Window4" url="pages/page1.html" width="800" height="600" modal="false"></div>
+```
+> #### 窗体属性一览(The window attributes):
+> | attribute    | type     | description                                       |
+> |:-------------|:---------|:--------------------------------------------------|
+> | title        | string   | 窗体标题                                           |
+> | url          | string   | 内容页面地址                                        |
+> | status       | string   | 初始状态('regular', 'maximized', 'minimized')      |
+> | top          | number   | 顶边距                                             |
+> | left         | number   | 左边距                                             |
+> | width        | number   | 宽度                                               |
+> | height       | number   | 高度                                               |
+> | minWidth     | number   | 最小宽度                                           |
+> | minHeight    | number   | 最小高度                                           |
+> | resizable    | boolean   | 是否允许控制大小                                    |
+> | maximize     | boolean   | 是否可以最大化                                     |
+> | minimize     | boolean   | 是否可以最小化                                     |
+> | closable     | boolean   | 是否可关闭                                         |
+> | draggable    | boolean   | 是否可拖拽                                         |
+> | modal        | boolean   | 是否模态窗体                                       |
+
+5. 现在可以添加一些按钮代码或者js代码去触发打开窗体。
+ You can now add some button code or js code to trigger the open window. Such as.
+ ```html
+ <script type="text/javascript">
+    openWindow("window1");
+</script>
+```
+或者(or):
+```html
+<button onclick="openWindow('window1')">window1</button>
+```
+
+### 更多用法(more usage)
+
+每个引入windowConnectionControl.js的窗体页面都包含三个作用域变量和多个方法.
+Each included windowConnectionControl.js window page contains three scoped variable and multiple functions.
+
+> * window, parentWindow, windowContainer (top level page)
+> * openWindow(...), returnData(...), getWindow(...), closeWindow(), closeParent()等等
+
+主要方法(Main functions):
+> * 打开窗体：openWindow(windowId)、openWindow(windowId,param);
+> * 子窗体获取传来数据：windowParam.*;
+> * 子窗体访问上级体：parentWindow;parentWindow.*/*();parentWindow.parentWindow.*/*();
+> * 子窗体向父窗体返回值：returnData(dataObject);
+> * 父窗体处理子窗体的返回值：function returnDataProcess(dataObject){...}
+> * 根据窗体id访问窗体：getWindow(windowId).*/*();
+> * 访问窗体注册容器：windowContainer.*/*();
+> * 关闭本窗体：closeWindow();
+> * 关窗事件处理：function onCloseWindow(){...;return boolean;}
+> * 关闭父窗体：parentWindow.closeWindow()/closeParent();
+
+个性用法举例(Individual use examples)
+> * 从父窗体打开其他窗体：parentWindow.openWindow(windowId,param)
+> * 关闭上...上级窗体parentWindow...parentWindow.close();//无限级
+> * 根据id关闭窗体：getWindow(windowId).closeWindow();
+> * 关闭窗体时不执行onWindowClose事件：onWindowClose=function(){};closeWindow();//覆盖一下onWindowClose方法即可。
+
+
+
+# License
+
+All code licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php). All images licensed under [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US). In other words you are basically free to do whatever you want. Just don't remove my name from the source.
+

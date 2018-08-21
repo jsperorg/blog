@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>page2</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="../EasyWindow/windowConnectionControl.js"></script>
+
+		<script type="text/javascript">
+
+
+			//实现窗体关闭处理函数(当窗体关闭时,该函数将被调用)
+			//Implement the window close handler. (When window close, this function will be execute.)
+			function onWindowClose(){
+
+				//Do some thing in here.
+
+				return true;
+			}
+
+			//实现子窗体返回值处理函数(当子窗体调用returnData(Object)时,该函数将被调用)
+			//Implement the children window return data callback function. (When children execute returnData(Object), this function will be execute.)
+			function returnDataProcess(data){
+				console.info(data);
+				//Do some thing in here.
+			}
+
+
+			function refreshInfo(){
+
+				$("#from").html(parentWindowId);
+				$("#windowId").html(currentWindowId);
+				if(windowParam!=null){
+					$("#windowParam").html(JSON.stringify(windowParam));
+				}
+
+			}
+
+
+			$(document).ready(function(){
+				refreshInfo();
+			});
+
+
+		</script>
+	</head>
+	<body style="background-color:#eef;">
+		Pparent id:&nbsp;<span id="from"> No parent.</span><br>
+		Self id:&nbsp;<span id="windowId"></span><br>
+		Gets the parameters:&nbsp;<span id="windowParam">None</span><br>
+		<button onclick="refreshInfo();">Refresh</button>
+		<hr>
+		<button onclick="openWindow('Window3',{data:'Opened from parent window '+currentWindowId});">Open Window and transmit the parameter.</button>
+		<button onclick="returnData('Window '+currentWindowId+' callback returnData(Object) to parent.');">Returns data to the parent window.</button>
+		<button onclick="closeParent();">Close parent.</button>
+		<button onclick="closeWindow();">Close self.</button>
+
+	</body>
+</html>

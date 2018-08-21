@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EasyWindow</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="EasyWindow/AeroWindow.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.12.1.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="EasyWindow/jquery-AeroWindow.js"></script>
+        <script type="text/javascript" src="EasyWindow/windowConnectionControl.js"></script>
+        <script type="text/javascript">
+        //声明本页面为窗体容器页面，以便窗体组件使用
+        //The page states that the page is a window container page.
+        window.isWindowContainer=true;
+        </script>
+    </head>
+    <body>
+        <button onclick="openWindow('Window1')">Window1</button>
+        <button onclick="openWindow('Window2')">Window2</button>
+        <button onclick="openWindow('Window3')">Window3</button>
+        <button onclick="openWindow('Window4')">Window4</button>
+
+        <!-- window define -->
+        <div id="Window1" style="display: none;" title="Window1" url="pages/page1.html" width="800" height="600" modal="false"></div>
+        <div id="Window2" style="display: none;" title="Window2" url="pages/page2.html" width="800" height="400" maximize="false" minimize="false"></div>
+        <div id="Window3" style="display: none;" title="Window3" url="pages/page3.html" width="800" height="400" maximize="false" minimize="false"></div>
+        <div id="Window4" style="display: none;" title="Window4" url="pages/page1.html" width="800" height="600" modal="false"></div>
+
+    </body>
+</html>

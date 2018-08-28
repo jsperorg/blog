@@ -8,36 +8,36 @@
 
 <table>
     <tr>
-        <td style="min-width:90px;text-align:right;">姓名</td><td>陈建宇</td>
-        <td style="min-width:90px;text-align:right;">性别</td><td>男</td>
+        <td align="right"  style="min-width:90px;text-align:right;">姓名</td><td>陈建宇</td>
+        <td align="right"  style="min-width:90px;text-align:right;">性别</td><td>男</td>
     </tr>
     <tr>
-        <td style="min-width:90px;text-align:right;">年龄</td><td>31</td>
-        <td style="min-width:90px;text-align:right;">工作经验</td><td>8年  </td>
+        <td align="right"  style="min-width:90px;text-align:right;">年龄</td><td>31</td>
+        <td align="right"  style="min-width:90px;text-align:right;">工作经验</td><td>8年  </td>
     </tr>
     <tr>
-        <td style="min-width:90px;text-align:right;">上家单位</td><td>用友·畅捷通</td>
-        <td style="min-width:90px;text-align:right;">岗位</td><td>开发工程师(全栈)</td>
+        <td align="right"  style="min-width:90px;text-align:right;">上家单位</td><td>用友·畅捷通</td>
+        <td align="right"  style="min-width:90px;text-align:right;">岗位</td><td>开发工程师(全栈)</td>
     </tr>
     <tr>
-        <td style="min-width:90px;text-align:right;">擅长方向</td><td>前端、java</td>
-        <td style="min-width:90px;text-align:right;">突出能力</td><td>javascript、资源整合、创新设计</td>
+        <td align="right"  style="min-width:90px;text-align:right;">擅长方向</td><td>前端、java</td>
+        <td align="right"  style="min-width:90px;text-align:right;">突出能力</td><td>javascript、资源整合、创新设计</td>
     </tr>
     <tr>
-        <td style="min-width:90px;text-align:right;">求职意向</td><td>前端工程师/全栈工程师/技术总监</td>
-        <td style="min-width:90px;text-align:right;">期望月薪</td><td>20K</td>
+        <td align="right"  style="min-width:90px;text-align:right;">求职意向</td><td>前端工程师/全栈工程师/技术总监</td>
+        <td align="right"  style="min-width:90px;text-align:right;">期望月薪</td><td>20K</td>
     </tr>
     <tr>
-        <td style="min-width:90px;text-align:right;">Github</td><td>https://github.com/jsperorg</td>
-        <td style="min-width:90px;text-align:right;">Blog</td><td>http://www.cnblogs.com/jsper</td>
+        <td align="right"  style="min-width:90px;text-align:right;">Github</td><td>https://github.com/jsperorg</td>
+        <td align="right"  style="min-width:90px;text-align:right;">Blog</td><td>http://www.cnblogs.com/jsper</td>
     </tr>
     <tr>
-        <td style="min-width:90px;text-align:right;">状态</td><td>离职待业</td>
-        <td style="min-width:90px;text-align:right;">求职坐标</td><td>成都(外地30k)</td>
+        <td align="right"  style="min-width:90px;text-align:right;">状态</td><td>离职待业</td>
+        <td align="right"  style="min-width:90px;text-align:right;">求职坐标</td><td>成都(外地30k)</td>
     </tr>
     <tr>
-        <td style="min-width:90px;text-align:right;">邮箱</td><td>thejava@163.com</td>
-        <td style="min-width:90px;text-align:right;">手机</td><td>18600890172</td>
+        <td align="right"  style="min-width:90px;text-align:right;">邮箱</td><td>thejava@163.com</td>
+        <td align="right"  style="min-width:90px;text-align:right;">手机</td><td>18600890172</td>
     </tr>
 </table>
 
@@ -49,7 +49,7 @@
 * 后台框架：`SpringMVC`、`Mybatis`、`Old SSH`
 * 前端框架：`Jquery系列`、`Vue`、`Bootstrap`、`Extjs`
 * 组&emsp;&emsp;件：`Docker`、`Nginx`、`Tomcat`、`Apache`、`Spring Boot`、`Spring Cloud`、`Redis`、`MemCache`、`ActiveMQ`、`WebPack`
-* 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`sublime`、`HeidiSQL`、`Navicat`、`SVN`
+* 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`subline`、`HeidiSQL`、`Navicat`、`SVN`
 * 特殊经验：`前端仿真Windows组件`、`财务软件业务`、`浏览器兼容`、`疑难杂症解决`、`全生命周期迭代`、`出差接洽`、`万人技能高考技术支持`
 
 

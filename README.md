@@ -58,7 +58,7 @@
 
 <table>
     <tr>
-        <td width="120" style="width:120px;">【时间地点】</td>
+        <td width="130" style="min-width:130px;">【时间地点】</td>
         <td>2014年3月-2018年7月&emsp;4年&emsp;北京</td>
     </tr>
     <tr>
@@ -96,7 +96,7 @@
 
 <table>
     <tr>
-        <td width="120" style="min-width:120px;">【时间地点】</td>
+        <td width="130" style="min-width:130px;">【时间地点】</td>
         <td>2012年6月-2014年3月&emsp;2年&emsp;北京</td>
     </tr>
     <tr>
@@ -134,7 +134,7 @@
 
 <table>
     <tr>
-        <td width="120" style="min-width:120px;">【时间地点】</td>
+        <td width="130" style="min-width:130px;">【时间地点】</td>
         <td>2009年11月-2012年5月&emsp;2年&emsp;成都</td>
     </tr>
     <tr>

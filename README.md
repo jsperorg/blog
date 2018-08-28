@@ -225,11 +225,9 @@ Android版下载：http://en66.net/en66.apk
 
 
 > ### 个人荣誉
-![优秀员工奖](http://en66.net/ry2.jpg)  
-
-![最佳贡献奖](http://en66.net/ry1.jpg)
-
-
+<img src="http://en66.net/ry2.jpg" width="600"/>
+<br>
+<img src="http://en66.net/ry1.jpg" width="600"/>
 
 > ### 教育经历
 2006-2009 成都职业技术学院 软件技术专业

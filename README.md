@@ -49,7 +49,7 @@
 * 后台框架：`SpringMVC`、`Mybatis`、`Old SSH`
 * 前端框架：`Jquery系列`、`Vue`、`Bootstrap`、`Extjs`
 * 组&emsp;&emsp;件：`Docker`、`Nginx`、`Tomcat`、`Apache`、`Spring Boot`、`Spring Cloud`、`Redis`、`MemCache`、`ActiveMQ`、`WebPack`
-* 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`subline`、`HeidiSQL`、`Navicat`、`SVN`
+* 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`sublime`、`HeidiSQL`、`Navicat`、`SVN`
 * 特殊经验：`前端仿真Windows组件`、`财务软件业务`、`浏览器兼容`、`疑难杂症解决`、`全生命周期迭代`、`出差接洽`、`万人技能高考技术支持`
 
 

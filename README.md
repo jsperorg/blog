@@ -33,7 +33,7 @@
     </tr>
     <tr>
         <td align="right"  style="min-width:90px;text-align:right;">状态</td><td>离职待业</td>
-        <td align="right"  style="min-width:90px;text-align:right;">求职坐标</td><td>成都(外地30k)</td>
+        <td align="right"  style="min-width:90px;text-align:right;">求职坐标</td><td>成都</td>
     </tr>
     <tr>
         <td align="right"  style="min-width:90px;text-align:right;">邮箱</td><td>thejava@163.com</td>
@@ -50,7 +50,7 @@
 * 前端框架：`Jquery系列`、`Vue`、`Bootstrap`、`Extjs`
 * 组&emsp;&emsp;件：`Docker`、`Nginx`、`Tomcat`、`Apache`、`Spring Boot`、`Spring Cloud`、`Redis`、`MemCache`、`ActiveMQ`、`WebPack`
 * 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`subline`、`HeidiSQL`、`Navicat`、`SVN`
-* 特殊经验：`前端仿真Windows组件`、`财务软件业务`、`浏览器兼容`、`疑难杂症解决`、`全生命周期迭代`、`出差接洽`、`万人技能高考技术支持`
+* 特殊经验：`前端仿真Windows组件`、`财务软件业务`、`考试系统`、`浏览器兼容`、`疑难杂症解决`、`全生命周期迭代`、`出差接洽`、`万人技能高考技术支持`
 
 
 
@@ -221,7 +221,10 @@ Android版下载：http://en66.net/en66.apk
 应用技术：代码编辑器、iframe、localStorage、拖拽上传、base64等。  
 演示：http://w3c.run
 
-
+* java网页采集器  
+描述：处于对爬虫的兴趣，业余时间自己用java+swing编写了一个网页采集器，整个程序包含web端和桌面采集器，采集器将采集的结果实时发布到web。采集器与web可分离，通过采集器端配置功能建立联系。  
+应用技术：java、swing、正则表达式、多线程等。  
+演示：https://github.com/jsperorg/JWebSpider
 
 
 > ### 个人荣誉

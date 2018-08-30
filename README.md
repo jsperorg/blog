@@ -49,7 +49,7 @@
 * 后台框架：`SpringMVC`、`Mybatis`、`Old SSH`
 * 前端框架：`Jquery系列`、`Vue`、`Bootstrap`、`Extjs`
 * 组&emsp;&emsp;件：`Docker`、`Nginx`、`Tomcat`、`Apache`、`Spring Boot`、`Spring Cloud`、`Redis`、`MemCache`、`ActiveMQ`、`WebPack`
-* 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`subline`、`HeidiSQL`、`Navicat`、`SVN`
+* 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`sublime`、`HeidiSQL`、`Navicat`、`SVN`
 * 特殊经验：`前端仿真Windows组件`、`财务软件业务`、`考试系统`、`浏览器兼容`、`疑难杂症解决`、`全生命周期迭代`、`出差接洽`、`万人技能高考技术支持`
 
 
@@ -212,7 +212,7 @@ Android版下载：http://en66.net/zhongjiangmei.apk
 
 * 【英溜溜】——中英双语阅读  
 描述：该网站针对pc和手机实现了两套UI，自动判别展示。网站技术难点在于双语阅读用户操控的实现，页面支持多种操控：段落对照、句子对照、句子阅读、单词释意，双语合并等。网站还包含js实现的单词连连看、段落翻译等游戏。
-应用技术：html+jquery+类bootstrap框架+php+mysql+y网易API。  
+应用技术：html+jquery+类bootstrap框架+php+mysql+网易语音API。  
 演示：http://en66.net  
 Android版下载：http://en66.net/en66.apk
 

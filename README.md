@@ -202,7 +202,7 @@ github: https://github.com/jsperorg/EasyWindow/
 
 > ### 其他个人作品
 * 【中奖没】——彩票拍照查奖应用  
-应用技术：html5  canvas、jquery动画、python、百度人工智能  
+应用技术：html5  canvas、jquery动画、python  
 演示：http://zhongjiangmei.com  
 Android版下载：http://en66.net/zhongjiangmei.apk
 
@@ -220,11 +220,6 @@ Android版下载：http://en66.net/en66.apk
 描述：该站点是一个在线编写HTML+javascript+CSS代码并在线运行的编程工具。
 应用技术：代码编辑器、iframe、localStorage、拖拽上传、base64等。  
 演示：http://w3c.run
-
-* java网页采集器  
-描述：处于对爬虫的兴趣，业余时间自己用java+swing编写了一个网页采集器，整个程序包含web端和桌面采集器，采集器将采集的结果实时发布到web。采集器与web可分离，通过采集器端配置功能建立联系。  
-应用技术：java、swing、正则表达式、多线程等。  
-演示：https://github.com/jsperorg/JWebSpider
 
 
 > ### 个人荣誉

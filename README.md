@@ -78,7 +78,7 @@
         <td>
         架构：Vuejs+Element-ui+Webpack+Nodejs+SpringBoot+SpringCloud+PostgreSQL<br>
         部署：
-        CentOS+Docker+Nginx+Tomcat+集群负载均衡<br>
+        CentOS+Docker+Nginx+Tomcat<br>
         持续集成：
         git+gitlab+jenkins+rundeck
         </td>

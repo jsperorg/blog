@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <td align="right"  style="min-width:90px;text-align:right;">上家单位</td><td>用友·畅捷通</td>
-        <td align="right"  style="min-width:90px;text-align:right;">岗位</td><td>开发工程师</td>
+        <td align="right"  style="min-width:90px;text-align:right;">上家岗位</td><td>开发工程师</td>
     </tr>
     <tr>
         <td align="right"  style="min-width:90px;text-align:right;">擅长方向</td><td>前端、java</td>

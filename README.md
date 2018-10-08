@@ -44,13 +44,13 @@
 
 
 > ### 经验技能
-* 语&emsp;&emsp;言：`java`、`javascript`、`HTML`、 `CSS`、`php`、`python`
+* 语&emsp;&emsp;言：`HTML`、 `CSS`、`ES6`、`Node.js`、`java`、`PHP`
+* 前端框架：`Vue`、`Element-UI`、`Bootstrap`、`Jquery系列`、`Extjs`
+* 后台框架：`SpringMVC`、`Mybatis`、`SSH`
+* 组&emsp;&emsp;件：`WebPack`、`Nginx`、`Tomcat`、`Redis`、`MemCache`、`ActiveMQ`、`zokeeper`、`Docker`
 * 操作系统：`Linux系列`、`MacOS`、`Windows`
-* 后台框架：`SpringMVC`、`Mybatis`、`Old SSH`
-* 前端框架：`Jquery系列`、`Vue`、`Bootstrap`、`Extjs`
-* 组&emsp;&emsp;件：`Docker`、`Nginx`、`Tomcat`、`Apache`、`Spring Boot`、`Spring Cloud`、`Redis`、`MemCache`、`ActiveMQ`、`WebPack`
-* 开发工具：`Jetbrains系列`、`Eclipse`、`git`、`Atom`、`sublime`、`HeidiSQL`、`Navicat`、`SVN`
-* 特殊经验：`前端仿真Windows组件`、`财务软件业务`、`考试系统`、`浏览器兼容`、`疑难杂症解决`、`全生命周期迭代`、`出差接洽`、`万人技能高考技术支持`
+* 开发工具：`VSCode`、`Jetbrains系列`、`Eclipse`、`git`、`sublime`、`HeidiSQL`、`Navicat`、`SVN`
+* 特别经验：`html仿真Windows组件`、`财务软件`、`考试系统`、`浏览器兼容`、`全生命周期迭代`、`万人技能高考技术支持`
 
 
 
@@ -59,7 +59,44 @@
 <table>
     <tr>
         <td width="130" style="min-width:130px;">【时间地点】</td>
-        <td>2014年3月-2018年7月&emsp;4年&emsp;北京</td>
+        <td>2018年3月-2018年7月&emsp;4个月&emsp;北京</td>
+    </tr>
+    <tr>
+        <td>【就职单位】</td>
+        <td>用友·畅捷通信息技术股份有限公司</td>
+    </tr>
+    <tr>
+        <td>【岗&emsp;&emsp;位】</td>
+        <td>前端开发工程师</td>
+    </tr>
+    <tr>
+        <td>【主要项目】</td>
+        <td>《畅课堂》</td>
+    </tr>
+    <tr>
+        <td>【相关技术】</td>
+        <td>
+        架构：Vuejs+Element-ui+Webpack+Nodejs+SpringBoot+SpringCloud+PostgreSQL<br>
+        部署：
+        CentOS+Docker+Nginx+Tomcat+集群负载均衡<br>
+        持续集成：
+        git+gitlab+jenkins+rundeck
+        </td>
+    </tr>
+    <tr>
+        <td>【工作描述】</td>
+        <td>
+        &emsp;&emsp;该项目是一个会计专业课堂辅助平台，分为学生、老师两种用户类型，老师可以创建班级、备课、创建课程资源、下发作业、管理学生等功能，学生可以加入班级，在线听课、练习、完成作业。我主要负责教师业务功能的开发。通过该项目的开发，使我掌握了Vuejs相关技术栈，对Element-ui的使用形成了一定的经验。能熟练利用vue-router、vuex、axios、mock开发前端项目。
+        </td>
+    </tr>
+</table>
+
+<hr>
+
+<table>
+    <tr>
+        <td width="130" style="min-width:130px;">【时间地点】</td>
+        <td>2014年3月-2018年2月&emsp;4年&emsp;北京</td>
     </tr>
     <tr>
         <td>【就职单位】</td>
